@@ -1,3 +1,3 @@
 # SWE3313Project
 
-<center>Hello World!</center>
+<h1><center>Hello World!</center></h1>
