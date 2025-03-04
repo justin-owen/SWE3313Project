@@ -20,4 +20,6 @@ We initially started out discussing our previous experiences to make an informed
 ### Team Assignments
 
 - The team was divided into different roles based on technologies, with two front-end developers and two back-end developers. The team is also divided by what administrative work each individual will undertake.
-- Click here
+- Click [here](https://github.com/justin-owen/SWE3313Project/blob/main/TeamAssignments.mdx) to view the team assignments
+
+### Technolo
