@@ -1,3 +1,3 @@
-# Team 7 - Intro to SWE 
+# Team 7 - Intro to SWE Project
 
-<h1>Hello World!</h1>
+Welcome to the Team 7 class project 
