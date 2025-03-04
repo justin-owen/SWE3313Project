@@ -17,4 +17,6 @@ Meet our Team:
 
 We initially started out discussing our previous experiences to make an informed decision on what tech stack we should utilize. From there, we branched off to the project premise of what we are selling and defined each of our roles for the duration of the project. 
 
-### Team As
+### Team Assignments
+
+- In order to divide the work, the team was divided into different roles based on technologies with two 
