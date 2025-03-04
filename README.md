@@ -4,6 +4,10 @@ Welcome to the Team 7 class project repository for SWE 3313, Introduction to Sof
 
 Our project will be an e-commerce site built with ASP.NET Core Blazor, with the data being stored with SQLite, that sells used cars to users, and would contain an administration side of the site to manage the inventory and view sales reports. Please have a look at our extensive documentation and planning process within this repository, as well as our source code to view our implementation.
 
-## Project
+## Project Plan
 
 ---
+
+Meet our Team:
+
+- 
