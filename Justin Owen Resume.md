@@ -10,8 +10,9 @@ https://www.linkedin.com/in/justin-owen1/
 
 ## TECHNICAL SKILLS
 
-**Programming:** Python, JavaScript, Java, Bash
-**Operating Systems:** Windows, Linux, OSX
+- 
+
+**Programming:** Python, JavaScript, Java, Bash **Operating Systems:** Windows, Linux, OSX
 **Other Technical Skills:** Node.js, MongoDB, Git, AWS, Spring Boot, PostgreSQL, Flask
 
 ## TECHNICAL EXPERIENCE
