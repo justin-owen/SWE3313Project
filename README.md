@@ -6,8 +6,6 @@ Our project will be an e-commerce site built with ASP.NET Core Blazor, with the 
 
 # Project Plan
 
-## Meet our Team:
-
 - [Justin Owen](https://github.com/justin-owen/SWE3313Project/blob/main/Justin%20Owen%20Resume.md)
 - [William Lane](https://github.com/justin-owen/SWE3313Project/blob/main/William%20Lane%20Resume.md)
 - [Pierre Lopez Orama](https://github.com/justin-owen/SWE3313Project/blob/main/PierreLopezOramaResume.md)
