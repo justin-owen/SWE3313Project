@@ -6,14 +6,16 @@ Our project will be an e-commerce site built with ASP.NET Core Blazor, with the 
 
 # Project Plan
 
+### Meet our Team:
+
 - [Justin Owen](https://github.com/justin-owen/SWE3313Project/blob/main/Justin%20Owen%20Resume.md)
 - [William Lane](https://github.com/justin-owen/SWE3313Project/blob/main/William%20Lane%20Resume.md)
 - [Pierre Lopez Orama](https://github.com/justin-owen/SWE3313Project/blob/main/PierreLopezOramaResume.md)
 - [Antonio Kinsler](https://github.com/justin-owen/SWE3313Project/blob/main/Antonio%20Kinsler%20Resume.md)
 
-We initially started out discussing our previous experiences to make an informed decision on what tech stack we should utilize. From there, we branched off to the project premise of what we are selling and defined each of our roles for the duration of the project. 
+We initially started out discussing our previous experiences to make an informed decision on what tech stack we should utilize. From there, we branched off to the project premise of what we are selling and defined each of our roles for the duration of the project.
 
-### Team Assignments
+#### Team Assignments
 
 - The team was divided into different roles based on technologies, with two front-end developers and two back-end developers. The team is also divided by what administrative work each individual will undertake.
 - Click [here](https://github.com/justin-owen/SWE3313Project/blob/main/TeamAssignments.mdx) to view the team assignments
