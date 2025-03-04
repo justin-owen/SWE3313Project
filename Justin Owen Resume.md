@@ -16,7 +16,9 @@ https://www.linkedin.com/in/justin-owen1/
 
 ## TECHNICAL EXPERIENCE
 
-KSU Sports Innovation Hackathon _Kennesaw State University, February 2025_
+**KSU Sports Innovation Hackathon** 
+
+_Kennesaw State University, February 2025_
 
 - Participated in and won KSU's first sports innovation hackathon where my team of four developed a web application in Flask where user's can make stat predictions for athletes and opt into SMS and email alerts for future games
 
