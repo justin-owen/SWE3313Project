@@ -20,7 +20,7 @@ Completed Nand to Tetris
 
 ## EDUCATION
 
-**Kennesaw State University/ Kennesaw, Georgia** 
+**Kennesaw State University/ Kennesaw, Georgia**
 
 _Pre-B.S. in Computer Science, Minor in Software Engineering May 2024 – Present_
 
