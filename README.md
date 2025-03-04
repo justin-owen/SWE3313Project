@@ -25,4 +25,4 @@ We initially started out discussing our previous experiences to make an informed
 ### Technology Selection
 
 - The project will be coded in C# with the ASP.NET Core Blazor framework and a database implementation with SQLite
-- 
+- Click [here](https://github.com/justin-owen/SWE3313Project/blob/main/TechnologyDescription.mdx) 
