@@ -15,4 +15,4 @@ Meet our Team:
 - [Pierre Lopez Orama](https://github.com/justin-owen/SWE3313Project/blob/main/PierreLopezOramaResume.md)
 - [Antonio Kinsler](https://github.com/justin-owen/SWE3313Project/blob/main/Antonio%20Kinsler%20Resume.md)
 
-We initially started out discussing our previous experiences to make an informed decision on what tech stack we should utilize. From there, we br
+We initially started out discussing our previous experiences to make an informed decision on what tech stack we should utilize. From there, we branched off to the project premise of what we
