@@ -1,4 +1,3 @@
-
 # Justin Owen
 
 ```
@@ -17,14 +16,16 @@ https://www.linkedin.com/in/justin-owen1/
 
 ## TECHNICAL EXPERIENCE
 
-**KSU Sports Innovation Hackathon
+\*\*KSU Sports Innovation Hackathon
 _Kennesaw State University, February 2025_
+
 - Participated in and won KSU's first sports innovation hackathon where my team of four developed a web application in Flask where user's can make stat predictions for athletes and opt into SMS and email alerts for future games
 
 ## EDUCATION
 
 **Kennesaw State University/ Kennesaw, Georgia**
 _Pre-B.S. in Computer Science, Minor in Software Engineering May 2024 – Present_
+
 - Programming and problem solving I and II
 
 ## WORK EXPERIENCE
