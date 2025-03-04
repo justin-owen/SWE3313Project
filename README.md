@@ -29,4 +29,4 @@ We initially started out discussing our previous experiences to make an informed
 
 ### Project Gantt Chart
 
-- Click here
+- Click [here](https://pierretutel.youtrack.cloud/gantt-charts/226-1) to view our detailed project plan, with timelines
