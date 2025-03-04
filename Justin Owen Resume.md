@@ -26,7 +26,7 @@ _Kennesaw State University, February 2025_
 **Kennesaw State University/ Kennesaw, Georgia**
 _Pre-B.S. in Computer Science, Minor in Software Engineering May 2024 – Present_
 
-- Programming and problem solving I and II
+- Programming and problem solving I and II, Database Systems, Into to Software E
 
 ## WORK EXPERIENCE
 
