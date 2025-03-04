@@ -19,4 +19,5 @@ We initially started out discussing our previous experiences to make an informed
 
 ### Team Assignments
 
-- In order to divide the work, the team was divided into different roles based on technologies with two 
+- In order to divide the work, the team was divided into different roles based on technologies with two front end developers and two back end developers. The team w
+- The 
