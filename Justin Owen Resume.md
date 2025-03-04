@@ -24,7 +24,8 @@ _Kennesaw State University, February 2025_
 
 ## EDUCATION
 
-**Kennesaw State University/ Kennesaw, Georgia**
+**Kennesaw State University/ Kennesaw, Georgia** 
+
 _Pre-B.S. in Computer Science, Minor in Software Engineering May 2024 – Present_
 
 - Programming and problem solving I and II, Database Systems, Intro to Software Engineering, Computer Organization and Architecture, Data Communications
@@ -32,6 +33,7 @@ _Pre-B.S. in Computer Science, Minor in Software Engineering May 2024 – Presen
 ## WORK EXPERIENCE
 
 **Perficient/ Woodstock, Georgia**
+
 _Associate Technical Consultant October 2023 - January 2024_
 
 - Training in Project Management Fundamentals, completing Agile Fundamentals training, and completing multiple tasks for the supervisor assigned including Software design on internal tools and admin-based tasks for Software Projects.
