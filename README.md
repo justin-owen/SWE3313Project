@@ -15,7 +15,7 @@ Our project will be an e-commerce site built with ASP.NET Core Blazor, with the 
 
 We initially started out discussing our previous experiences to make an informed decision on what tech stack we should utilize. From there, we branched off to the project premise of what we are selling and defined each of our roles for the duration of the project.
 
-#### Team Assignments
+### Team Assignments
 
 - The team was divided into different roles based on technologies, with two front-end developers and two back-end developers. The team is also divided by what administrative work each individual will undertake.
 - Click [here](https://github.com/justin-owen/SWE3313Project/blob/main/TeamAssignments.mdx) to view the team assignments
