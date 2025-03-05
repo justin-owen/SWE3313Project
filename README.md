@@ -10,7 +10,7 @@ Our project will be an e-commerce site built with ASP.NET Core Blazor, with the 
 
 - \[**Justin Owen**\]
 
-- **\[William Lane\](/Resumes/William Lane Resume.md)**
+- [William Lane](/Resum)
 
 - [**Pierre Lopez Orama**](https://github.com/justin-owen/SWE3313Project/blob/main/PierreLopezOramaResume.md)
 
