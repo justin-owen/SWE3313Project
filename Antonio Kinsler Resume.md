@@ -1,7 +1,12 @@
-#Antonio Kinsler
+# Antonio Kinsler
 
+```plaintext
 akinsler@Students.kennesaw.edu
-[LinkedIn](www.linkedin.com/in/antonio-kinsler-a88427237)
+```
+
+```plaintext
+ LinkedIn
+```
 
 ## Technical Skills
 
