@@ -1,12 +1,10 @@
 # Antonio Kinsler
 
-```plaintext
+```
 akinsler@Students.kennesaw.edu
 ```
 
-```plaintext
- LinkedIn
-```
+LinkedIn
 
 ## Technical Skills
 
