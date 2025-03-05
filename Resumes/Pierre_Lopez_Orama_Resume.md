@@ -22,7 +22,7 @@ Completed Nand to Tetris
 
 **Kennesaw State University/ Kennesaw, Georgia**
 
-_Pre-B.S. in Computer Science, Minor in Software Engineering May 2024 – Present_
+_Pre-B.S. in Computer Science and Software Engineering May 2024 – Present_
 
 - AP CSA, Programming and Problem Solving II, Intro to Database Systems, Intro to Software Engineering
 
