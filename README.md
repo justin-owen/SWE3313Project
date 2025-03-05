@@ -12,9 +12,9 @@ Our project will be an e-commerce site built with ASP.NET Core Blazor, with the 
 
 - [**William Lane**](Resumes/William_Lane_Resume.md)
 
-- [**Pierre Lopez Orama**](https://github.com/justin-owen/SWE3313Project/blob/main/PierreLopezOramaResume.md)
+- [**Pierre Lopez Orama**](Resumes/Pierre_Lopez_Orama.md)
 
-- [**Antonio Kinsler**](https://github.com/justin-owen/SWE3313Project/blob/main/Antonio%20Kinsler%20Resume.md)
+- [**Antonio Kinsler**](Resumes/Antonio_Kinsler.md)
 
 We initially started out discussing our previous experiences to make an informed decision on what tech stack we should utilize. From there, we branched off to the project premise of what we are selling and defined each of our roles for the duration of the project.
 
