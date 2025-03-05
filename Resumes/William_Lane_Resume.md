@@ -25,7 +25,7 @@ _B.S. in Software Engineering August 2022 – Present_
 
 ## WORK EXPERIENCE
 
-\*\*Sweet Tooth Game Development Studios
+**Sweet Tooth Game Development Studios
 _Atlanta GA, May 2023_
 
 - Co-founded a small indie game development studio with other students at Kennesaw and other Georgia Schools to help further our software and project management expertise. Sweet Tooth exposed me to intricacies in the planning and oversight, as well as the roadblocks for development.
