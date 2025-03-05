@@ -4,8 +4,6 @@
 akinsler@Students.kennesaw.edu
 ```
 
-LinkedIn
-
 ## Technical Skills
 
 ---
