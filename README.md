@@ -8,9 +8,9 @@ Our project will be an e-commerce site built with ASP.NET Core Blazor, with the 
 
 ### Meet our Team:
 
-- \[**Justin Owen**\](Resumes/William Lane Resume.md)
+- \[**Justin Owen**\]
 
-- **\[William Lane\]()**
+- **\[William Lane\](/Resumes/William Lane Resume.md)**
 
 - [**Pierre Lopez Orama**](https://github.com/justin-owen/SWE3313Project/blob/main/PierreLopezOramaResume.md)
 
