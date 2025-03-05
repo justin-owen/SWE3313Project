@@ -8,7 +8,7 @@ Our project will be an e-commerce site built with ASP.NET Core Blazor, with the 
 
 ### Meet our Team:
 
-- \[**Justin Owen**\]
+- [**Justin Owen**](Resumes/Justin_Owen_Resume.md)
 
 - [**William Lane**](Resumes/William_Lane_Resume.md)
 
