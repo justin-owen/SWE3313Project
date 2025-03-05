@@ -16,7 +16,7 @@ https://www.linkedin.com/in/justin-owen1/
 
 ## TECHNICAL EXPERIENCE
 
-**KSU Sports Innovation Hackathon** 
+**KSU Sports Innovation Hackathon**
 
 _Kennesaw State University, February 2025_
 
@@ -24,7 +24,7 @@ _Kennesaw State University, February 2025_
 
 ## EDUCATION
 
-**Kennesaw State University/ Kennesaw, Georgia** 
+**Kennesaw State University/ Kennesaw, Georgia**
 
 _Pre-B.S. in Computer Science, Minor in Software Engineering May 2024 – Present_
 
