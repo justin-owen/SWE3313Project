@@ -4,9 +4,9 @@
 akinsler@Students.kennesaw.edu
 ```
 
-```plaintext
-https://www.linkedin.com/in/antonio-kinsler-a88427237/
-```
+
+[LinkedIn](https://www.linkedin.com/in/antonio-kinsler-a88427237/)
+
 
 ## Technical Skills
 
