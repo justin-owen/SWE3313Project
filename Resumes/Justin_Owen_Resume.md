@@ -5,7 +5,7 @@ jowen50@students.kennesaw.edu
 ```
 
 
-[LinkedIn](https://www.linkedin.com/in/justin-owen1/)
+**[LinkedIn](https://www.linkedin.com/in/justin-owen1/)**
 
 ## TECHNICAL SKILLS
 
