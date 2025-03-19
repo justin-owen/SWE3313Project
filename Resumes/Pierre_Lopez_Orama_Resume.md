@@ -5,7 +5,7 @@ jlopezor@students.kennesaw.edu
 ```
 
 
-[LinkedIn](https://www.linkedin.com/in/jendry-pierre-lopez-orama-169419339/)
+**[LinkedIn](https://www.linkedin.com/in/jendry-pierre-lopez-orama-169419339/)**
 
 
 ## TECHNICAL SKILLS
