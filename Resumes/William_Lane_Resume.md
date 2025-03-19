@@ -4,9 +4,9 @@
 wlane12@students.kennesaw.edu
 ```
 
-```
-www.linkedin.com/in/william-lane-703809321
-```
+
+[LinkedIn](www.linkedin.com/in/william-lane-703809321)
+
 
 ## TECHNICAL SKILLS
 
