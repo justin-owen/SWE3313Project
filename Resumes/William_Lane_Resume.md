@@ -6,8 +6,8 @@
 
 ## TECHNICAL SKILLS
 
-**Programming:** Java, C#, HTML, Python
-**Operating Systems:** Windows, MacOS
+- **Programming:** Java, C#, HTML, Python
+- **Operating Systems:** Windows, MacOS
 
 ## EDUCATION
 
