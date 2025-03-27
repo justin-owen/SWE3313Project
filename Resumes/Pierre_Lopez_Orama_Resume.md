@@ -15,7 +15,7 @@
 
 ## TECHNICAL EXPERIENCE
 
-Completed Nand to Tetris
+**Programming:** Completed Nand to Tetris
 
 ## EDUCATION
 
