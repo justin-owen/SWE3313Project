@@ -2,7 +2,7 @@
 
 
 # Contact:
-- **jlopezor@students.kennesaw.edu**
+- _**jlopezor@students.kennesaw.edu**_
 
 - **[LinkedIn](https://www.linkedin.com/in/jendry-pierre-lopez-orama-169419339/)**
 
