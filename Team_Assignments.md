@@ -1,15 +1,5 @@
 # Team Roles & Assignments
 
-## ⭐ Team Lead
-**Team Member:** [Insert Name Here]  
-**Selection Method:** Chosen by team consensus / Rotated weekly / Assigned based on experience  
-**Responsibilities:**
-- Coordinate tasks and team communication.
-- Ensure deadlines are met and project milestones are on track.
-- Act as the main point of contact for the team.
-- Oversee collaboration and resolve conflicts when needed.
-
----
 
 ## 🔧 Front-End Developer
 **Team Members:** Justin, William  
