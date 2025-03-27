@@ -1,5 +1,6 @@
 # Team Roles & Assignments
 
+---
 
 ## 🔧 Front-End Developer
 **Team Members:** Justin, William  
