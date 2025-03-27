@@ -33,5 +33,5 @@ _Pre-B.S. in Computer Science, Minor in Software Engineering May 2024 – Presen
 
 _Associate Technical Consultant October 2023 - January 2024_
 
-- Training in Project Management Fundamentals, completing Agile Fundamentals training, and completing multiple tasks for the supervisor assigned including Software design on internal tools and admin-based tasks for Software Projects.
-- Shadowing in Software Development projects on multiple teams and presenting my ideas to aid in the Software Development process.
+- - Training in Project Management Fundamentals, completing Agile Fundamentals training, and completing multiple tasks for the supervisor assigned including Software design on internal tools and admin-based tasks for Software Projects.
+- - Shadowing in Software Development projects on multiple teams and presenting my ideas to aid in the Software Development process.
