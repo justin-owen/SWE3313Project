@@ -12,7 +12,8 @@ wlane12@students.kennesaw.edu
 
 ## EDUCATION
 
-**Kennesaw State University/ Kennesaw, Georgia**
+_**Kennesaw State University/ Kennesaw, Georgia**_
+
 _B.S. in **Software Engineering** August 2022 – Present_
 
 - Programming and problem solving I and II, Discrete Structures for Computing, Technical Writing, Probability and Data Analysis
