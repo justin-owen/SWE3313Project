@@ -1,12 +1,9 @@
 # William Lane
 
-```
+# Contact:
 wlane12@students.kennesaw.edu
-```
-
 
 - **[LinkedIn](www.linkedin.com/in/william-lane-703809321)**
-
 
 ## TECHNICAL SKILLS
 
@@ -16,12 +13,10 @@ wlane12@students.kennesaw.edu
 ## EDUCATION
 
 **Kennesaw State University/ Kennesaw, Georgia**
-_B.S. in Software Engineering August 2022 – Present_
+_B.S. in **Software Engineering** August 2022 – Present_
 
-- Programming and problem solving I and II
-- Discrete Structures for Computing
-- Technical Writing
-- Probability and Data Analysis
+- Programming and problem solving I and II, Discrete Structures for Computing, Technical Writing, Probability and Data Analysis
+
 
 ## WORK EXPERIENCE
 
