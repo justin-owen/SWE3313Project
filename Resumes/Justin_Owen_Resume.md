@@ -1,9 +1,7 @@
 # Justin Owen
 
-```
-jowen50@students.kennesaw.edu
-```
-
+# Contact:
+- _**jowen50@students.kennesaw.edu**_
 
 - **[LinkedIn](https://www.linkedin.com/in/justin-owen1/)**
 
@@ -23,7 +21,7 @@ _Kennesaw State University, February 2025_
 
 ## EDUCATION
 
-**Kennesaw State University/ Kennesaw, Georgia**
+_**Kennesaw State University/ Kennesaw, Georgia**_
 
 _Pre-B.S. in Computer Science, Minor in Software Engineering May 2024 – Present_
 
