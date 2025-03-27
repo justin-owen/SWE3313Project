@@ -18,9 +18,9 @@
 
 ## Education
 
-**Kennesaw Sate University/ Kennesaw, Georgia**
+_**Kennesaw Sate University/ Kennesaw, Georgia**_
 
-- B.S. In **Computer Science**, August 2023 - Present_
+- _B.S. In **Computer Science**, August 2023 - Present_
 
 - Programming and Problem Solving I and II, Intro to Software Engineering, Technical Writing
 
