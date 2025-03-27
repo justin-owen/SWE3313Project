@@ -20,7 +20,7 @@
 
 **Kennesaw Sate University/ Kennesaw, Georgia**
 
-- B.S. In Computer Science, August 2023 - Present_
+- B.S. In **Computer Science**, August 2023 - Present_
 
 - Programming and Problem Solving I and II, Intro to Software Engineering, Technical Writing
 
