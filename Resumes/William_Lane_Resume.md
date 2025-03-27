@@ -1,7 +1,7 @@
 # William Lane
 
 # Contact:
-wlane12@students.kennesaw.edu
+- wlane12@students.kennesaw.edu
 
 - **[LinkedIn](www.linkedin.com/in/william-lane-703809321)**
 
