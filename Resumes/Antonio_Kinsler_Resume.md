@@ -1,7 +1,7 @@
 # Antonio Kinsler
 
 # Contact:
-**akinsler@Students.kennesaw.edu**
+- **akinsler@Students.kennesaw.edu**
 
 
 - **[LinkedIn](https://www.linkedin.com/in/antonio-kinsler-a88427237/)**
