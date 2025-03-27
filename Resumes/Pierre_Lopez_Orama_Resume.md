@@ -20,7 +20,7 @@
 ## EDUCATION
 
 _**Kennesaw State University/Kennesaw, Georgia**_
-- Pre-B.S. in **Computer Science** and **Software Engineering** May 2024 – Present
+_Pre-B.S. in **Computer Science** and **Software Engineering** May 2024 – Present_
 - Programming and Problem Solving II, Intro to Database Systems, and Intro to Software Engineering
 _**Brookwood High School**_
 - AP CSA, Linear Algebra through Progamming
