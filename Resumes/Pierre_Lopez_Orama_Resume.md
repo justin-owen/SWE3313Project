@@ -1,9 +1,8 @@
 # Pierre Lopez Orama
 
-```
-jlopezor@students.kennesaw.edu
-```
 
+# Contact:
+**jlopezor@students.kennesaw.edu**
 
 - **[LinkedIn](https://www.linkedin.com/in/jendry-pierre-lopez-orama-169419339/)**
 
