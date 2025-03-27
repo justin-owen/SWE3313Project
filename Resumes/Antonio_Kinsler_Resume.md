@@ -1,8 +1,7 @@
 # Antonio Kinsler
 
-```
-akinsler@Students.kennesaw.edu
-```
+# Contact:
+**akinsler@Students.kennesaw.edu**
 
 
 - **[LinkedIn](https://www.linkedin.com/in/antonio-kinsler-a88427237/)**
@@ -21,7 +20,7 @@ akinsler@Students.kennesaw.edu
 
 **Kennesaw Sate University/ Kennesaw, Georgia**
 
-_B.S. In Computer Science, August 2023 - Present_
+- B.S. In Computer Science, August 2023 - Present_
 
 - Programming and Problem Solving I and II, Intro to Software Engineering, Technical Writing
 
