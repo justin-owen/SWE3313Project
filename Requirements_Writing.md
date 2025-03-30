@@ -45,7 +45,7 @@
 
     * Commit Users to The Database T7S-8
       * Needs to Have
-      * Effort (Medium, a day)
+      * Effort (Medium, 1-3 days)
       * Functional
       * Establish a system where the database creates a new file for a user, storing their username, password, and eventually their purchases
 
@@ -53,12 +53,12 @@
 
     - Create Username Text Box T7S-9
       - Needs to Have
-      - Effort (Medium, 3 hours)
+      - Effort (Medium, 1-3 days)
       - Functional
       - Create an input text box for usernames on login that will check the input to the database, in order to recognize the password. If there is no matching username, inform the user that the username does not exist.
     - Create Password Text Box T7S-10
       - Needs to Have
-      - Effort (Low, 3 hours)
+      - Effort (Low, 1-3 hours)
       - Functional
       - Create an input text box for passwords on login that will check the input with the database user file matching the username. If it matches, user should be logged in. 
 
@@ -66,7 +66,7 @@
 
     - Display Database Inventory T7S-11
       - Needs to Have
-      - Effort (Medium, 3 hours to a day)
+      - Effort (Medium,  1-3 days)
       - Functional
       - Pull the inventory list from the database, and display a small photo, the full car name, and price.
     - Implement 'Sort By Price' Function T7S-12
