@@ -33,6 +33,12 @@ We initially started out discussing our previous experiences to make an informed
 
 - Click [here](https://pierretutel.youtrack.cloud/gantt-charts/226-1) to view our detailed project plan, with timelines
 
+### Requirements Introduction
+
+Following our client elicitation, our team has drafted a few requirements documents to help further digest and explain the intended requirements and uses for "Lucky's Cars"
+- [Requirements Writing](/Requirements/Requirements_Writing.md)
+- [Decision Table](/Requirements/DecisionTable.pdf)
+- [Use Case Diagram](/Requirements/UseCaseDiagram.pdf)
 
 https://marvelapp.com/prototype/116j4eea
 
