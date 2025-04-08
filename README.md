@@ -49,6 +49,8 @@ Below is a link to a MarvelApp website mockup, which illustrates our vision for 
 
 - [www.luckyscars.com](https://marvelapp.com/prototype/116j4eea)
 
+Due to the temporary nature of the above example, the site does NOT contain a "log out" feature. If you wish to see a different user type, please refresh the page by clicking the link again. 
+
 ### Project Presentations
 
 - Click [here](/Presentations/Presentation_Links.md) for a list of recorded presentations of the project deliverables
