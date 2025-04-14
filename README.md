@@ -22,12 +22,12 @@ We initially started out discussing our previous experiences to make an informed
 ### Team Assignments
 
 - The team was divided into different roles based on technologies, with two front-end developers and two back-end developers. The team is also divided by what administrative work each individual will undertake.
-- Click [here](/Team_Assignments.mdx) to view the team assignments
+- Click [here](/Team_Assignments.md) to view the team assignments
 
 ### Technology Selection
 
 - The project will be coded in C# with the ASP.NET Core Blazor framework and a database implementation with SQLite
-- Click [here](/Technology_Description.mdx) to view our technology decisions, the why of those decisions, and the documentation of each technology
+- Click [here](/Technology_Description.md) to view our technology decisions, the why of those decisions, and the documentation of each technology
 
 ### Project Gantt Chart
 
