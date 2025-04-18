@@ -57,8 +57,8 @@ This section details our system for implementation.
 
 - [Languages and Frameworks](/Technical_Design_Document.md)
 - [Entity Relationship Diagram](https://www.mermaidchart.com/raw/26a8b5af-2b36-47ac-a59b-302b8c635ee6?theme=light&version=v0.1&format=svg)
-- [Entity Description Tables](/Description_Tables)
-- [Example Entity Data](/Example_Data)
+- [Entity Description Tables](/Description_Tables.md)
+- [Example Entity Data](/Example_Data.md)
 
 ### Project Presentations
 
