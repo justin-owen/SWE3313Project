@@ -51,6 +51,15 @@ Below is a link to a MarvelApp website mockup, which illustrates our vision for 
 
 Due to the temporary nature of the above example, the site does NOT contain a "log out" feature. If you wish to see a different user type, please refresh the page by clicking the link again. 
 
+### Technical Design
+
+This section details our system for implementation. 
+
+- [Languages and Frameworks]
+- [Entity Relationship Diagram]
+- [Entity Description Tables]
+- [Example Entity Data]
+
 ### Project Presentations
 
 - Click [here](/Presentations/Presentation_Links.md) for a list of recorded presentations of the project deliverables
