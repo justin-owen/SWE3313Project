@@ -63,6 +63,8 @@ This section details our system for implementation.
   
 - [Example Entity Data](/Example_Data.md)
 
+- [Coding Style Sheet](/Style_Sheet.md)
+
 ### Project Presentations
 
 - Click [here](/Presentations/Presentation_Links.md) for a list of recorded presentations of the project deliverables
