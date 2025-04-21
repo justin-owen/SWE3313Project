@@ -63,7 +63,7 @@ This section details our system for implementation.
   
 - [Example Entity Data](/Example_Data.md)
 
-- [Coding Style Sheet](/Style_Sheet.md)
+- [Coding Style Sheet](/Coding_Style_Guide.md)
 
 ### Project Presentations
 
