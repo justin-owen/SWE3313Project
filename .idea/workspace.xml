@@ -4,7 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c05d782a-00b1-47b6-95f5-f1c9abe6291f" name="Changes" comment="" />
+    <list default="true" id="c05d782a-00b1-47b6-95f5-f1c9abe6291f" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Luckys_Cars/Luckys_Cars/Components/Pages/Home.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Luckys_Cars/Luckys_Cars/Components/Pages/Home.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Luckys_Cars/Luckys_Cars/obj/Debug/net9.0/Luckys_Cars.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Luckys_Cars/Luckys_Cars/obj/Debug/net9.0/Luckys_Cars.AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Luckys_Cars/Luckys_Cars/obj/Debug/net9.0/Luckys_Cars.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Luckys_Cars/Luckys_Cars/obj/Debug/net9.0/Luckys_Cars.AssemblyInfoInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Luckys_Cars/Luckys_Cars/obj/Debug/net9.0/Luckys_Cars.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Luckys_Cars/Luckys_Cars/obj/Debug/net9.0/Luckys_Cars.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Luckys_Cars/Luckys_Cars/obj/Debug/net9.0/Luckys_Cars.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Luckys_Cars/Luckys_Cars/obj/Debug/net9.0/Luckys_Cars.assets.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Luckys_Cars/Luckys_Cars/obj/Luckys_Cars.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/Luckys_Cars/Luckys_Cars/obj/Luckys_Cars.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Luckys_Cars/Luckys_Cars/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/Luckys_Cars/Luckys_Cars/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Luckys_Cars/Luckys_Cars/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Luckys_Cars/Luckys_Cars/obj/project.nuget.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Luckys_Cars/Luckys_Cars/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/Luckys_Cars/Luckys_Cars/obj/project.packagespec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Luckys_Cars/Luckys_Cars/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/Luckys_Cars/Luckys_Cars/obj/rider.project.restore.info" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -37,6 +50,9 @@
     &quot;accountId&quot;: &quot;55d54851-2881-4a4d-987b-2379a0161910&quot;
   }
 }</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Luckys_Cars/Luckys_Cars/Components/Pages/Home.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -47,21 +63,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="c05d782a-00b1-47b6-95f5-f1c9abe6291f" name="Changes" comment="" />
@@ -70,7 +86,8 @@
       <option name="presentableId" value="Default" />
       <updated>1745354948070</updated>
       <workItem from="1745354949116" duration="1675000" />
-      <workItem from="1745372999671" duration="896000" />
+      <workItem from="1745372999671" duration="1913000" />
+      <workItem from="1745374964326" duration="694000" />
     </task>
     <task id="LOCAL-00001" summary="commit">
       <option name="closed" value="true" />
@@ -96,7 +113,39 @@
       <option name="project" value="LOCAL" />
       <updated>1745373108078</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="commit">
+      <option name="closed" value="true" />
+      <created>1745373930301</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1745373930301</updated>
+    </task>
+    <task id="LOCAL-00005" summary="commit">
+      <option name="closed" value="true" />
+      <created>1745374658244</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1745374658244</updated>
+    </task>
+    <task id="LOCAL-00006" summary="commit">
+      <option name="closed" value="true" />
+      <created>1745374680099</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1745374680099</updated>
+    </task>
+    <task id="LOCAL-00007" summary="commit">
+      <option name="closed" value="true" />
+      <created>1745374700517</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1745374700517</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
