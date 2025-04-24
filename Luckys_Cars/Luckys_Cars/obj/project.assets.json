@@ -8,26 +8,24 @@
     "net9.0": []
   },
   "packageFolders": {
-    "C:\\Users\\kklan\\.nuget\\packages\\": {}
+    "C:\\Users\\bron1\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\kklan\\RiderProjects\\SWE3313Project\\Luckys_Cars\\Luckys_Cars\\Luckys_Cars.csproj",
+      "projectUniqueName": "C:\\Users\\bron1\\RiderProjects\\SWE3313Project\\Luckys_Cars\\Luckys_Cars\\Luckys_Cars.csproj",
       "projectName": "Luckys_Cars",
-      "projectPath": "C:\\Users\\kklan\\RiderProjects\\SWE3313Project\\Luckys_Cars\\Luckys_Cars\\Luckys_Cars.csproj",
-      "packagesPath": "C:\\Users\\kklan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\kklan\\RiderProjects\\SWE3313Project\\Luckys_Cars\\Luckys_Cars\\obj\\",
+      "projectPath": "C:\\Users\\bron1\\RiderProjects\\SWE3313Project\\Luckys_Cars\\Luckys_Cars\\Luckys_Cars.csproj",
+      "packagesPath": "C:\\Users\\bron1\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\bron1\\RiderProjects\\SWE3313Project\\Luckys_Cars\\Luckys_Cars\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\kklan\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\bron1\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -70,7 +68,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Users\\kklan\\.dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Users\\bron1\\.dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
