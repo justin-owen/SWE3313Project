@@ -8,23 +8,23 @@
     "net9.0": []
   },
   "packageFolders": {
-    "C:\\Users\\kklan\\.nuget\\packages\\": {},
+    "C:\\Users\\emper\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\kklan\\RiderProjects\\SWE3313Project\\Luckys_Cars\\Luckys_Cars\\Luckys_Cars.csproj",
+      "projectUniqueName": "C:\\Users\\emper\\Source\\Repos\\SWE3313Project\\Luckys_Cars\\Luckys_Cars\\Luckys_Cars.csproj",
       "projectName": "Luckys_Cars",
-      "projectPath": "C:\\Users\\kklan\\RiderProjects\\SWE3313Project\\Luckys_Cars\\Luckys_Cars\\Luckys_Cars.csproj",
-      "packagesPath": "C:\\Users\\kklan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\kklan\\RiderProjects\\SWE3313Project\\Luckys_Cars\\Luckys_Cars\\obj\\",
+      "projectPath": "C:\\Users\\emper\\Source\\Repos\\SWE3313Project\\Luckys_Cars\\Luckys_Cars\\Luckys_Cars.csproj",
+      "packagesPath": "C:\\Users\\emper\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\emper\\Source\\Repos\\SWE3313Project\\Luckys_Cars\\Luckys_Cars\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\kklan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\emper\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -75,7 +75,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Users\\kklan\\.dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
