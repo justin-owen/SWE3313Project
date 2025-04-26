@@ -10,4 +10,8 @@
       <Folder Include="Components\PagePhotos\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Microsoft.Data.Sqlite" Version="10.0.0-preview.3.25171.6" />
+    </ItemGroup>
+
 </Project>
