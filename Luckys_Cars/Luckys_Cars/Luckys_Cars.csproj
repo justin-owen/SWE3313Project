@@ -8,11 +8,6 @@
 
     <ItemGroup>
       <Folder Include="Components\PagePhotos\" />
-      <Folder Include="wwwroot\images\" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Content Include="wwwroot\Raster.png" />
     </ItemGroup>
 
 </Project>
