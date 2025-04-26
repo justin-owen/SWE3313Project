@@ -10,8 +10,4 @@
       <Folder Include="Components\PagePhotos\" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Content Include="wwwroot\Raster.png" />
-    </ItemGroup>
-
 </Project>
