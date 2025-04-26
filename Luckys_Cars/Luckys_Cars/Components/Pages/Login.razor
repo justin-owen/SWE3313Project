@@ -7,25 +7,25 @@
 
 
 <!-- This centers the login box-->
-<div class="d-flex align-items-center vh-100 flex-column gap-4">
+<div class="d-flex align-items-center vh-100 flex-column gap-5">
     <!-- Panther Logo-->
     <div class="text-center">
-        <img src="images/Raster.png" class="img-fluid" style="width: 350px" alt="Panther Logo">
+        <img src="images/Raster.png" class="img-fluid" style="width: 25%" alt="Panther Logo">
     </div>
     <h1>Login</h1>
 
     <!-- User Id input -->
-    <div class="form-group">
+    <div class="form-group" style="width: 15%">
         <input type="text" class="form-control" id="loginInput"
-               @bind="userIdInput" placeholder="Email or Username" style="width: 250px"/>
+               @bind="userIdInput" placeholder="Email or Username"/>
     </div>
-    <div class="form-group">
+    <div class="form-group" style="width: 15%">
         <input type="password" class="form-control" id="passwordInput"
-               @bind="userPassword" placeholder="Password" style="width: 250px"/>
+               @bind="userPassword" placeholder="Password"/>
     </div>
     <!--Buttons-->
-    <button class="btn btn-primary " type="button" style="width: 250px">Login</button>
-    <button class="btn btn-primary" type="button" style="width: 250px">Sign Up</button>
+    <button class="btn btn-primary" type="button" style="width: 15%">Login</button>
+    <button class="btn btn-primary" type="button" style="width: 15%">Sign Up</button>
 </div>
 
 
