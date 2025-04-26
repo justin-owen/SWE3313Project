@@ -2129,6 +2129,11 @@ progress {
   border-radius: var(--bs-border-radius);
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
+
+.auto-text-inp-size{
+  font-size: clamp(2rem, 1rem, 0.5rem);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .form-control {
     transition: none;
@@ -7662,6 +7667,12 @@ textarea.form-control-lg {
 
 .border-opacity-100 {
   --bs-border-opacity: 1;
+}
+
+.wh-login{
+  width: 20rem;
+  height: 4rem;
+  font-size: 2rem;
 }
 
 .w-25 {
