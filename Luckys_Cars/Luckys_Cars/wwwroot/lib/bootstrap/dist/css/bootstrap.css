@@ -2119,13 +2119,13 @@ progress {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
-  color: var(--bs-body-color);
+  color: var(#000000);
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  background-color: var(--bs-body-bg);
+  background-color: var(#fff);
   background-clip: padding-box;
-  border: var(--bs-border-width) solid var(--bs-border-color);
+  border: #425163;
   border-radius: var(--bs-border-radius);
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
@@ -2142,10 +2142,10 @@ progress {
 }
 .form-control:focus {
   color: var(--bs-body-color);
-  background-color: var(--bs-body-bg);
-  border-color: #86b7fe;
+  background-color: #fff;
+  border-color: #425163;
   outline: 0;
-  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+  box-shadow: 0 0 0 1px #F4A356 ;
 }
 .form-control::-webkit-date-and-time-value {
   min-width: 85px;

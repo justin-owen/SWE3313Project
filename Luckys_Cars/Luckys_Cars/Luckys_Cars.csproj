@@ -6,4 +6,12 @@
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
 
+    <ItemGroup>
+      <Folder Include="Components\PagePhotos\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Include="wwwroot\Raster.png" />
+    </ItemGroup>
+
 </Project>
