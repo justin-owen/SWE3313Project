@@ -1,8 +1,39 @@
 ﻿@page "/"
 @layout NoNavMenuLayout
 <PageTitle>Login</PageTitle>
-<div class="d-flex justify-content-center align-items-center vh-100 flex-column gap-3">
-        <h1>Login</h1>
-        <button class="btn btn-primary " type="button" style="width: 25%">Login</button>
-        <button class="btn btn-primary" type="button" style="width: 25%">Sign Up</button>
+
+
+
+
+
+<!-- This centers the login box-->
+<div class="d-flex align-items-center vh-100 flex-column gap-4">
+    <!-- Panther Logo-->
+    <div class="text-center">
+        <img src="Raster.png" class="img-fluid" style="width: 350px" alt="Panther Logo">
+    </div>
+    <h1>Login</h1>
+
+    <!-- User Id input -->
+    <div class="form-group">
+        <input type="text" class="form-control" id="loginInput"
+               @bind="userIdInput" placeholder="Email or Username" style="width: 250px"/>
+    </div>
+    <div class="form-group">
+        <input type="password" class="form-control" id="passwordInput"
+               @bind="userPassword" placeholder="Password" style="width: 250px"/>
+    </div>
+    <!--Buttons-->
+    <button class="btn btn-primary " type="button" style="width: 250px">Login</button>
+    <button class="btn btn-primary" type="button" style="width: 250px">Sign Up</button>
 </div>
+
+
+@code {
+        
+    
+//  Stores text input
+public string userIdInput { get; set; }
+public string userPassword { get; set; }
+
+}
