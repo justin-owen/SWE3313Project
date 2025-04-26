@@ -11,7 +11,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <None Include="wwwroot\Raster.png" />
+      <Content Include="wwwroot\Raster.png" />
     </ItemGroup>
 
 </Project>
