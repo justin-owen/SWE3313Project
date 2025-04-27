@@ -67,6 +67,8 @@ This section details our system for implementation.
 
 - [Seed Data](/Seed_Data.md)
 
+- [Data Storage Plan](/Data_Storage_Plan.md)
+
 ### Project Presentations
 
 - Click [here](/Presentations/Presentation_Links.md) for a list of recorded presentations of the project deliverables
