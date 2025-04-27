@@ -3,9 +3,6 @@
 <PageTitle>Login</PageTitle>
 
 
-
-
-
 <!-- This centers the login box-->
 <div class="d-flex align-items-center vh-100 flex-column gap-5">
     <!-- Panther Logo-->
@@ -17,16 +14,16 @@
 
     <!-- User Id input -->
     <div class="form-group wh-login">
-        <input type="text" class="form-control auto-text-inp-size" id="loginInput"
+        <input type="text" class="form-control login-text-inp-size" id="loginInput"
                @bind="userIdInput" placeholder="Email or Username"/>
     </div>
     <div class="form-group wh-login">
-        <input type="password" class="form-control auto-text-inp-size" id="passwordInput"
+        <input type="password" class="form-control login-text-inp-size" id="passwordInput"
                @bind="userPassword" placeholder="Password"/>
     </div>
     <!--Buttons-->
     <button class="btn btn-primary wh-login" type="button">Login</button>
-    <button class="btn btn-primary wh-login" type="button">Sign Up</button>
+    <NavLink class="btn btn-primary wh-login" type="button" href="/SignUp">Sign Up</NavLink>
 </div>
 
 
