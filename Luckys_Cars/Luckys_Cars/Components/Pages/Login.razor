@@ -1,40 +1,50 @@
-﻿@page "/"
-@layout NoNavMenuLayout
-<PageTitle>Login</PageTitle>
+﻿    @page "/"
+    @rendermode InteractiveServer
+    @using Microsoft.EntityFrameworkCore.Metadata.Internal
+    @layout NoNavMenuLayout
+    @inject NavigationManager Navigation
+    <PageTitle>Login</PageTitle>
 
 
-<!-- This centers the login box-->
-<div class="d-flex align-items-center vh-100 flex-column gap-4">
-    <!-- Panther Logo-->
-    <div class="text-center">
-        <img src="images/Raster.png" class="img-fluid" style="width: 25%" alt="Panther Logo">
-    </div>
-    <h1 style="font-size: 5rem; font-family: Norwester, Arial, sans-serif;">Lucky's Cars</h1>
-    <h1>Login</h1>
+    <!-- This centers the login box-->
+    <div class="d-flex align-items-center vh-100 flex-column gap-4">
+        <!-- Panther Logo-->
+        <div class="text-center">
+            <img src="images/Raster.png" class="img-fluid" style="width: 25%" alt="Panther Logo">
+        </div>
+        <h1 style="font-size: 5rem; font-family: Norwester, Arial, sans-serif;">Lucky's Cars</h1>
+        <h1>Login</h1>
 
-    <!-- User Id input -->
-    <div class="form-group wh-login">
-        <input type="text" class="form-control login-text-inp-size" id="loginInput"
-               @bind="userIdInput" placeholder="Email or Username"/>
-    </div>
-    
-    <div class="form-group wh-login">
-        <input type="password" class="form-control login-text-inp-size" id="passwordInput"
-               @bind="userPassword" placeholder="Password"/>
-    </div>
-    
-    <!--Buttons-->
-    <button class="btn btn-primary wh-login" type="button">Login</button>
-    <NavLink class="btn btn-primary wh-login" type="button" href="/SignUp">Sign Up</NavLink>
-</div>
-
-
-@code {
+        <!-- User Id input -->
+        <div class="form-group wh-login">
+            <input type="text" class="form-control login-text-inp-size" id="loginInput"
+                   @bind="userIdInput" placeholder="Email or Username"/>
+        </div>
         
-    
-//  Stores text input
-private string userIdInput { get; set; }
-private string userPassword { get; set; }
+        <div class="form-group wh-login">
+            <input type="password" class="form-control login-text-inp-size" id="passwordInput"
+                   @bind="userPassword" placeholder="Password"/>
+        </div>
+        
+        <!--Buttons-->
+        <button class="btn btn-primary wh-login" @onclick="GoToPage" type="button" >Login</button>
+        <NavLink class="btn btn-primary wh-login" type="button" href="/SignUp">Sign Up</NavLink>
+    </div>
 
 
-}
+    @code {
+            
+        
+    //  Stores text input
+    private string userIdInput { get; set; }
+    private string userPassword { get; set; }
+
+
+    //Button Press
+        public void GoToPage()
+        {
+            Navigation.NavigateTo("/Inventory");
+            Console.WriteLine("Click!");
+        }
+
+    }
