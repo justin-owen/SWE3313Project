@@ -18,18 +18,18 @@
 
 ### Inventory Image Table
 
-| itemId | image |
-| ------ | ----- |
-|        |       |
-|        |       |
-|        |       |
-|        |       |
-|        |       |
-|        |       |
-|        |       |
-|        |       |
-|        |       |
-|        |       |
-|        |       |
-|        |       |
+| itemId | image                                                        |
+| ------ | ------------------------------------------------------------ |
+| 00001  | ![2012-ford-mustang-gt-premium-2dr-fastback-image1](C:\Users\kklan\Downloads\2012-ford-mustang-gt-premium-2dr-fastback-image1.jpg) |
+| 00001  | ![2012-ford-mustang-gt-premium-2dr-fastback-image2](C:\Users\kklan\Downloads\2012-ford-mustang-gt-premium-2dr-fastback-image2.jpg) |
+| 00001  | ![2012-ford-mustang-gt-premium-2dr-fastback-image3](C:\Users\kklan\Downloads\2012-ford-mustang-gt-premium-2dr-fastback-image3.jpg) |
+| 00002  | ![2022-honda-accord-sport-4dr-sedan-1-5t-i4-cvt-Image1](C:\Users\kklan\Downloads\2022-honda-accord-sport-4dr-sedan-1-5t-i4-cvt-Image1.jpg) |
+| 00002  | ![2022-honda-accord-sport-4dr-sedan-1-5t-i4-cvt-image2](C:\Users\kklan\Downloads\2022-honda-accord-sport-4dr-sedan-1-5t-i4-cvt-image2.jpg) |
+| 00002  | ![2022-honda-accord-sport-4dr-sedan-1-5t-i4-cvt-image3](C:\Users\kklan\Downloads\2022-honda-accord-sport-4dr-sedan-1-5t-i4-cvt-image3.jpg) |
+| 00003  | ![2021-toyota-tacoma-sr-image1](C:\Users\kklan\Downloads\2021-toyota-tacoma-sr-image1.jpg) |
+| 00003  | ![2021-toyota-tacoma-sr-image2](C:\Users\kklan\Downloads\2021-toyota-tacoma-sr-image2.jpg) |
+| 00003  | ![-image3](C:\Users\kklan\Downloads\-image3.jpg)             |
+| 00004  | ![2013-mercedes-benz-c-class-c-300-sport-4matic-awd-4dr-sedan-image1](C:\Users\kklan\Downloads\2013-mercedes-benz-c-class-c-300-sport-4matic-awd-4dr-sedan-image1.jpg) |
+| 00004  | ![2013-mercedes-benz-c-class-c-300-sport-4matic-awd-4dr-sedan-image2](C:\Users\kklan\Downloads\2013-mercedes-benz-c-class-c-300-sport-4matic-awd-4dr-sedan-image2.jpg) |
+| 00004  | ![2013-mercedes-benz-c-class-c-300-sport-4matic-awd-4dr-sedan-image3](C:\Users\kklan\Downloads\2013-mercedes-benz-c-class-c-300-sport-4matic-awd-4dr-sedan-image3.jpg) |
 
