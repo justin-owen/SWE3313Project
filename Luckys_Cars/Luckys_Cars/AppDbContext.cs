@@ -1,4 +1,7 @@
 ﻿
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace Luckys_Cars
 {
     using Microsoft.EntityFrameworkCore;
@@ -17,7 +20,9 @@ namespace Luckys_Cars
 
     public class Car  // Define your Car class here
     {
+        [Key]
         public int ItemId { get; set; }   // primary key for cars
+        
         public string extColor { get; set; }  // Exterior color
         public string intColor { get; set; }  // interior color
         public int miles { get; set; }
@@ -28,13 +33,17 @@ namespace Luckys_Cars
         public string engine { get; set; }
         public string transmission { get; set; }
         public int cost { get; set; }
+        
+        [ForeignKey("saleId")]
         public int saleId { get; set; }  // foreign key for cars
         
     }
 
     public class Users
     {
+        [Key]
         public int UserId { get; set; }  //primary key for users
+       
         public string name { get; set; }
         public string email { get; set; }
         public string username { get; set; }
@@ -44,7 +53,9 @@ namespace Luckys_Cars
 
     public class Sale
     {
+        [Key]
         public int saleId { get; set; }
+        
         public int invPrice { get; set; }   // Uses a multiply and divide system to save decimal numbers
                                             // more accurately in SQLite infrastructure
         public int tax { get; set; }
