@@ -1,6 +1,8 @@
 ﻿@inject AppDbContext _context
 @page "/SignUp"
 @layout NoNavMenuLayout
+@rendermode InteractiveServer
+@inject NavigationManager Navigation
 
 <PageTitle>Sign Up</PageTitle>
 
@@ -47,9 +49,10 @@
             
             
             <!--Buttons-->
-            <div class="col d-flex justify-content-center gap-4"> 
-                <NavLink class="btn btn-primary wh-login-sm align-items-center
-                     justify-content-center" type="button" href="/"> Back </NavLink>
+            <div class="col d-flex justify-content-center gap-4">
+                
+                <!-- Navlink didn't like navigating to source page "/"-->
+                <button class="btn btn-primary wh-login-sm" type="button" @onclick="GoToLogin"> Back </button>
                 <button class="btn btn-primary wh-login-sm" type="button">Register</button>
             </div>
         </div>
@@ -83,5 +86,10 @@
         };
 
 
+    }
+
+    void GoToLogin()
+    {
+        Navigation.NavigateTo("/");
     }
 }
