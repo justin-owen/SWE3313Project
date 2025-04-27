@@ -1,13 +1,14 @@
 # Coding Style Guide
 
-This guide is largely based on the base Blazor C# and HTML Style Guide. For questions without answers on this document, please refer to the Blazor documentation, Bootstrap documentation, or if unclear reference the project team as a whole. Unless the project is complete, this file will remain incomplete.
+This guide is largely based on the base Blazor C# and HTML Style Guide. For questions without answers on this document, please refer to the Blazor documentation, Bootstrap documentation, or if unclear reference the project team as a whole. Unless the project is complete, this file will remain subject to change.
 
 ## Code
 
 - Program will be adapted from the base framework for Blazor Webapp in the JetBrains Rider IDE
 - Break long lines, greater than 150 characters whenever possible
   - If impossible, consider revisiting with different syntax
-
+### Spaces
+- Use hyphen (-) for space between names when appropriate
 ### C#
 
 - Variables should be named using Pascal Case
@@ -22,6 +23,8 @@ This guide is largely based on the base Blazor C# and HTML Style Guide. For ques
 ### CSS
 
 - Integrating *Bootstrap* CSS
+- Default naming conventions to match Bootstrap
+- Incorporate as much html styling through bootstrap.css 
 
 ## Files
 
