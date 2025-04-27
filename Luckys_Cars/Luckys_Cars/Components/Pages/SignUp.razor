@@ -1,5 +1,7 @@
-﻿@page "/SignUp"
+﻿@inject AppDbContext _context
+@page "/SignUp"
 @layout NoNavMenuLayout
+
 <PageTitle>Sign Up</PageTitle>
 
 <!-- This centers the login box-->
@@ -20,7 +22,7 @@
         <!-- User Id input -->
         <div class="form-group wh-login">
             <input type="text" class="form-control login-text-inp-size" id="loginInput"
-                   @bind="userIdInput" placeholder="Email or Username"/>
+                   @bind="userIdInput" placeholder="Email"/>
         </div>
         <div class="form-group wh-login">
             <input type="password" class="form-control login-text-inp-size" id="passwordInput"
@@ -59,6 +61,21 @@
     private string userPassword { get; set; }
     private string userFirstName { get; set; }
     private string userLastName { get; set; }
-    
 
+    private async Task RegisterUser()
+    {
+        var newUser = new Users
+        {
+            name = userFirstName + " " + userLastName,
+            email = userIdInput,                  // placeholder for now until extra prompt is added for username
+            username = userIdInput,               //
+            password = userPassword,
+            isAdmin = 0,
+
+
+
+        };
+
+
+    }
 }
