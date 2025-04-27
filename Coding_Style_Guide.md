@@ -1,6 +1,6 @@
 # Coding Style Guide
 
-This guide is largely based on the Google C# and HTML Style Guide. For questions without answers on this document, please refer to the Google Style Guide, or if unclear reference the project team as a whole. Unless the project is complete, this file will remain incomplete.
+This guide is largely based on the base Blazor C# and HTML Style Guide. For questions without answers on this document, please refer to the Blazor documentation, Bootstrap documentation, or if unclear reference the project team as a whole. Unless the project is complete, this file will remain incomplete.
 
 ## Code
 
@@ -10,17 +10,11 @@ This guide is largely based on the Google C# and HTML Style Guide. For questions
 
 ### C#
 
-- Classes, methods, interfaces, and variables should be named using Pascal Case
-- Begin class names with C
-- Begin interface names with I
-- Begin method names with M // MAYBE NOT?
+- Variables should be named using Pascal Case
 - Namespace 'using' implementation should be ordered alphabetically except for 'System' or at need
   - Exceptions should be explained with a comment
 
 ### HTML
-
-- Implement <!DOCTYPE html> on all html documents
-- Use lowercase for all html syntax
 - Attempt to omit optional tags for readability
   - Some may remain on need
 - Use double quotations when possible
@@ -31,12 +25,12 @@ This guide is largely based on the Google C# and HTML Style Guide. For questions
 
 ## Files
 
-- File names should be named using Pascal Case
-- Class file names should match the class name
+- Component file names should be named using Pascal Case
+- C# Class file names should match the class name
 
 ## Indentation
 
-- Use two space // MAYBE NOT?
+- Use Tab indentation
 
 ## Comments
 
