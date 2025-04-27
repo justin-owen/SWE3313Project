@@ -5,7 +5,7 @@
 <PageTitle>Sign Up</PageTitle>
 
 <!-- This centers the login box-->
-<div class="d-flex align-items-center vh-100 flex-column gap-5">
+<div class="d-flex align-items-center vh-100 flex-column gap-4">
     
     
     <!-- Panther Logo-->
@@ -18,11 +18,15 @@
     
     <h1>Sign Up</h1>
 
-    <div class="d-flex align-items-center flex-column gap-5" style="width: 20rem">
+    <div class="d-flex align-items-center flex-column gap-4" style="width: 20rem">
         <!-- User Id input -->
         <div class="form-group wh-login">
             <input type="text" class="form-control login-text-inp-size" id="loginInput"
-                   @bind="userIdInput" placeholder="Email"/>
+                   @bind="userIdInput" placeholder="Username"/>
+        </div>
+        <div class="form-group wh-login">
+            <input type="email" class="form-control login-text-inp-size" id="emailInput"
+                   @bind="userEmailInput" placeholder="Email"/>
         </div>
         <div class="form-group wh-login">
             <input type="password" class="form-control login-text-inp-size" id="passwordInput"
@@ -44,7 +48,8 @@
             
             <!--Buttons-->
             <div class="col d-flex justify-content-center gap-4"> 
-                <NavLink class="btn btn-primary wh-login-sm" type="button" href="/">Back</NavLink>
+                <NavLink class="btn btn-primary wh-login-sm align-items-center
+                     justify-content-center" type="button" href="/"> Back </NavLink>
                 <button class="btn btn-primary wh-login-sm" type="button">Register</button>
             </div>
         </div>
@@ -58,6 +63,7 @@
     
 //  Stores text input
     private string userIdInput { get; set; }
+    private string userEmailInput { get; set; }
     private string userPassword { get; set; }
     private string userFirstName { get; set; }
     private string userLastName { get; set; }
@@ -67,7 +73,7 @@
         var newUser = new Users
         {
             name = userFirstName + " " + userLastName,
-            email = userIdInput,                  // placeholder for now until extra prompt is added for username
+            email = userEmailInput,                  // placeholder for now until extra prompt is added for username
             username = userIdInput,               //
             password = userPassword,
             isAdmin = 0,

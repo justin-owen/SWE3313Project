@@ -4,7 +4,7 @@
 
 
 <!-- This centers the login box-->
-<div class="d-flex align-items-center vh-100 flex-column gap-5">
+<div class="d-flex align-items-center vh-100 flex-column gap-4">
     <!-- Panther Logo-->
     <div class="text-center">
         <img src="images/Raster.png" class="img-fluid" style="width: 25%" alt="Panther Logo">
@@ -17,10 +17,12 @@
         <input type="text" class="form-control login-text-inp-size" id="loginInput"
                @bind="userIdInput" placeholder="Email or Username"/>
     </div>
+    
     <div class="form-group wh-login">
         <input type="password" class="form-control login-text-inp-size" id="passwordInput"
                @bind="userPassword" placeholder="Password"/>
     </div>
+    
     <!--Buttons-->
     <button class="btn btn-primary wh-login" type="button">Login</button>
     <NavLink class="btn btn-primary wh-login" type="button" href="/SignUp">Sign Up</NavLink>
