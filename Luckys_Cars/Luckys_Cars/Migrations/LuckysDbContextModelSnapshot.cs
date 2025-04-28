@@ -16,108 +16,140 @@ namespace Luckys_Cars.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.4");
 
-            modelBuilder.Entity("Luckys_Cars.Data.Car", b =>
+            modelBuilder.Entity("Luckys_Cars.Models.Cars_Model", b =>
                 {
                     b.Property<int>("ItemId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("Cost")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Engine")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ExtColor")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Features")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("IntColor")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Make")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Miles")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Model")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("SaleId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Transmission")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("Year")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("cost")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("engine")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("extColor")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("features")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("intColor")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("make")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("miles")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("model")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("saleId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("transmission")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.HasKey("ItemId");
 
+                    b.HasIndex("SaleId");
+
                     b.ToTable("Cars");
+
+                    b.HasData(
+                        new
+                        {
+                            ItemId = 1,
+                            Cost = 1750000,
+                            Engine = "5.0L V8 412hp",
+                            ExtColor = "Red",
+                            Features = "Steering Wheel Audio Controls, Satellite and Bluetooth Radio, Keyless Entry, Traction Control, Rear Spoiler",
+                            IntColor = "Black",
+                            Make = "Ford",
+                            Miles = 95151,
+                            Model = "Mustang GT Premium",
+                            Transmission = "Manual 6 Speed",
+                            Year = 2012
+                        },
+                        new
+                        {
+                            ItemId = 2,
+                            Cost = 1899999,
+                            Engine = "1.5L Turbo I4 192 hp",
+                            ExtColor = "Black",
+                            Features = "Bluetooth Radio, Automatic Climate Control",
+                            IntColor = "Black",
+                            Make = "Honda",
+                            Miles = 10898,
+                            Model = "Accord Sport",
+                            Transmission = "CVT",
+                            Year = 2022
+                        },
+                        new
+                        {
+                            ItemId = 3,
+                            Cost = 3199500,
+                            Engine = "3.5L V6",
+                            ExtColor = "White",
+                            Features = "Audio Controls on Steering Wheel, Bluetooth Radio, Climate Control, Heated Mirrors",
+                            IntColor = "Cement",
+                            Make = "Toyota",
+                            Miles = 28214,
+                            Model = "Tacoma",
+                            Transmission = "Automatic 6 Speed",
+                            Year = 2021
+                        },
+                        new
+                        {
+                            ItemId = 4,
+                            Cost = 899500,
+                            Engine = "3.5L V6",
+                            ExtColor = "Red",
+                            Features = "Moonroof, Bluetooth Audio, Audio Controls on Steering Wheel",
+                            IntColor = "Black",
+                            Make = "Mercedes-Benz",
+                            Miles = 94400,
+                            Model = "C-Class C 300 Sport",
+                            Transmission = "Automatic 7 Speed",
+                            Year = 2013
+                        });
                 });
 
-            modelBuilder.Entity("Luckys_Cars.Data.Sale", b =>
+            modelBuilder.Entity("Luckys_Cars.Models.Sale_Model", b =>
                 {
-                    b.Property<int>("saleId")
+                    b.Property<int>("SaleId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("invPrice")
+                    b.Property<int>("InvPrice")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("shipping")
+                    b.Property<int>("Shipping")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("tax")
+                    b.Property<int>("Tax")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("userId")
+                    b.Property<int>("UserId")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("saleId");
+                    b.HasKey("SaleId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Sale");
-                });
-
-            modelBuilder.Entity("Luckys_Cars.Data.Users", b =>
-                {
-                    b.Property<int>("UserId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("email")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("isAdmin")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("name")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("password")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("username")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("UserId");
-
-                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Luckys_Cars.Models.User_Model", b =>
@@ -147,7 +179,47 @@ namespace Luckys_Cars.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("UserModel");
+                    b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = 1,
+                            Email = "wlane12@students.kennesaw.edu",
+                            IsAdmin = 1,
+                            Name = "Developer",
+                            Password = "SillyHill795",
+                            Username = "Developer_Admin"
+                        },
+                        new
+                        {
+                            UserId = 2,
+                            Email = "JAdkiss1@kennesaw.edu",
+                            IsAdmin = 1,
+                            Name = "Jeff Adkisson",
+                            Password = "SecretPassword3313",
+                            Username = "JAdkiss1"
+                        });
+                });
+
+            modelBuilder.Entity("Luckys_Cars.Models.Cars_Model", b =>
+                {
+                    b.HasOne("Luckys_Cars.Models.Sale_Model", "Sale")
+                        .WithMany()
+                        .HasForeignKey("SaleId");
+
+                    b.Navigation("Sale");
+                });
+
+            modelBuilder.Entity("Luckys_Cars.Models.Sale_Model", b =>
+                {
+                    b.HasOne("Luckys_Cars.Models.User_Model", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }

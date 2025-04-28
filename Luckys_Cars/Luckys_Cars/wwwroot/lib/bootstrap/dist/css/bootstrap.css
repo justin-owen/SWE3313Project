@@ -687,7 +687,6 @@ progress {
   border-radius: var(--bs-border-radius);
   max-width: 100%;
   height: auto;
-  radius
 }
 
 .figure {
@@ -2104,11 +2103,13 @@ progress {
   font-size: 1rem;
   width: 20rem !important;
   height: 4rem !important;
+  color: black !important;
 }
 .login-text-inp-size-sm{
   font-size: 1rem;
   width: 100% !important;
   height: 4rem !important;
+  color: black !important;
 }
 @media (prefers-reduced-motion: reduce) {
   .form-control {

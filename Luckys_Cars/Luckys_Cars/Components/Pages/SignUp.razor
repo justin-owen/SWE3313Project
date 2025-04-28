@@ -1,6 +1,7 @@
-﻿@inject LuckysDbContext _context
+﻿@inject DataService DataService
 @page "/SignUp"
 @using Luckys_Cars.Data
+@using Luckys_Cars.Models
 @layout NoNavMenuLayout
 @rendermode InteractiveServer
 @inject NavigationManager Navigation
@@ -20,30 +21,38 @@
     <h1 style="font-size: 5rem; font-family: Norwester, Arial, sans-serif;">Lucky's Cars</h1>
     
     <h1>Sign Up</h1>
+    @if (!string.IsNullOrWhiteSpace(signupError))
+    {
+        <div class="d-flex justify-content-center align-items-center" style="height: 10vh;">
+            <div class="alert alert-danger text-center" role="alert">
+                @signupError
+            </div>
+        </div>
+    }
 
     <div class="d-flex align-items-center flex-column gap-4" style="width: 20rem">
         <!-- User Id input -->
         <div class="form-group wh-login">
             <input type="text" class="form-control login-text-inp-size" id="loginInput"
-                   @bind="userIdInput" placeholder="Username"/>
+                   @bind="newUser.Username" placeholder="Username"/>
         </div>
         <div class="form-group wh-login">
             <input type="email" class="form-control login-text-inp-size" id="emailInput"
-                   @bind="userEmailInput" placeholder="Email"/>
+                   @bind="newUser.Email" placeholder="Email"/>
         </div>
         <div class="form-group wh-login">
             <input type="password" class="form-control login-text-inp-size" id="passwordInput"
-                   @bind="userPassword" placeholder="Password"/>
+                   @bind="newUser.Password" placeholder="Password"/>
         </div>
         <div class="form-group row gap-1">
             <div class="col">
                 <input type="text" class="form-control login-text-inp-size-sm" id="firstNameInput"
-                       @bind="userFirstName" placeholder="First Name"/>
+                       @bind="firstName" placeholder="First Name"/>
             </div>
 
             <div class="col">
                 <input type="text" class="form-control login-text-inp-size-sm" id="lastNameInput"
-                       @bind="userLastName" placeholder="Last Name"/>
+                       @bind="lastName" placeholder="Last Name"/>
             </div>
         </div>
         <div class=" row">
@@ -54,7 +63,7 @@
                 
                 <!-- Navlink didn't like navigating to source page "/"-->
                 <button class="btn btn-primary wh-login-sm" type="button" @onclick="GoToLogin"> Back </button>
-                <button class="btn btn-primary wh-login-sm" type="button">Register</button>
+                <button class="btn btn-primary wh-login-sm" type="button" @onclick="AddUser">Register</button>
             </div>
         </div>
         </div>
@@ -66,29 +75,35 @@
         
     
 //  Stores text input
-    private string userIdInput { get; set; }
-    private string userEmailInput { get; set; }
-    private string userPassword { get; set; }
-    private string userFirstName { get; set; }
-    private string userLastName { get; set; }
+    private User_Model newUser = new User_Model();
+    private string firstName;
+    private string lastName;
+    
+    
+    //Loads Users
+    private List<User_Model> users;
+    
+    //In case of entry error
+    private string signupError = string.Empty;
 
-    private async Task RegisterUser()
+    protected override async Task OnInitializedAsync()
     {
-        var newUser = new Users
-        {
-            name = userFirstName + " " + userLastName,
-            email = userEmailInput,                  // placeholder for now until extra prompt is added for username
-            username = userIdInput,               //
-            password = userPassword,
-            isAdmin = 0,
-
-
-
-        };
-
-
+        users = await DataService.GetUsers();
     }
 
+    private async Task AddUser()
+    {
+        
+        newUser.Name = firstName + " " + lastName;
+        var (success, message) = await DataService.AddUser(newUser);
+        signupError = message;
+
+        if (success)
+        {
+            Navigation.NavigateTo("/");
+        }
+    }
+    
     void GoToLogin()
     {
         Navigation.NavigateTo("/");

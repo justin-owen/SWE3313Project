@@ -36,10 +36,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcTm9OYXZNZW51TGF5b3V0LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/kklan/RiderProjects/SWE3313Project/Luckys_Cars/Luckys_Cars/Components/Pages/Counter.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb3VudGVyLnJhem9y
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/kklan/RiderProjects/SWE3313Project/Luckys_Cars/Luckys_Cars/Components/Pages/Error.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xFcnJvci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
@@ -58,10 +54,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/kklan/RiderProjects/SWE3313Project/Luckys_Cars/Luckys_Cars/Components/Pages/SignUp.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTaWduVXAucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/kklan/RiderProjects/SWE3313Project/Luckys_Cars/Luckys_Cars/Components/Pages/Weather.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xXZWF0aGVyLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/kklan/RiderProjects/SWE3313Project/Luckys_Cars/Luckys_Cars/Components/Routes.razor]

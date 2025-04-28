@@ -18,6 +18,7 @@ public class Cars_Model
     public string Engine { get; set; }
     public string Transmission { get; set; }
     public int Cost { get; set; }
-    [ForeignKey("SaleId")]
     public int? SaleId { get; set; }  // foreign key for cars
+    [ForeignKey("SaleId")]
+    public Sale_Model? Sale { get; set; }
 }

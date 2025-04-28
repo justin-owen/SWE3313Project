@@ -3,6 +3,7 @@
     @layout NoNavMenuLayout
     @rendermode InteractiveServer
     @inject NavigationManager Navigation
+    @inject DataService DataService
     <PageTitle>Login</PageTitle>
 
 
@@ -14,7 +15,16 @@
         </div>
         <h1 style="font-size: 5rem; font-family: Norwester, Arial, sans-serif;">Lucky's Cars</h1>
         <h1>Login</h1>
-
+        
+        <!-- Error Message -->
+        @if (!string.IsNullOrWhiteSpace(loginError))
+        {
+            <div class="d-flex justify-content-center align-items-center" style="height: 10vh;">
+                <div class="alert alert-danger text-center" role="alert">
+                    @loginError
+                </div>
+            </div>
+        }
         <!-- User Id input -->
         <div class="form-group wh-login">
             <input type="text" class="form-control login-text-inp-size" id="loginInput"
@@ -27,7 +37,7 @@
         </div>
         
         <!--Buttons-->
-        <button class="btn btn-primary wh-login" @onclick="GoToPage" type="button" >Login</button>
+        <button class="btn btn-primary wh-login" @onclick="AttemptLogin" type="button" >Login</button>
         <NavLink class="btn btn-primary wh-login" type="button" href="/SignUp">Sign Up</NavLink>
     </div>
 
@@ -38,12 +48,28 @@
     //  Stores text input
     private string userIdInput { get; set; }
     private string userPassword { get; set; }
+    
+    //Error message
+    private string loginError = String.Empty;
 
 
     //Button Press
-        public void GoToPage()
+    private async Task AttemptLogin()
+    {
+        var users = await DataService.GetUsers();
+        var loginAttempt = users.FirstOrDefault(u =>
+            (u.Username.Equals(userIdInput, StringComparison.Ordinal)
+             || u.Email.Equals(userIdInput, StringComparison.Ordinal))
+            && u.Password == userPassword);
+        if (loginAttempt != null)
         {
             Navigation.NavigateTo("/Inventory");
         }
+        else
+        {
+            loginError = "Incorrect username or password";
+        }
+
+    }
 
     }

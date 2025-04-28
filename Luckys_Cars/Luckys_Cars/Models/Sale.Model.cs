@@ -11,7 +11,8 @@ public class Sale_Model
                                         // more accurately in SQLite infrastructure
     public int Tax { get; set; }
     public int Shipping { get; set; }
-    [ForeignKey("UserId")]
     public int UserId { get; set; }   //foreign key
+    [ForeignKey("UserId")]
+    public User_Model? User { get; set; }
 
 }
