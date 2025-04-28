@@ -1,21 +1,22 @@
 ﻿
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
+using Luckys_Cars.Models;
 
-namespace Luckys_Cars
+namespace Luckys_Cars.Data
 {
-    using Microsoft.EntityFrameworkCore;
-
-    public class AppDbContext : DbContext
+    public class LuckysDbContext : DbContext
     {
         
         public DbSet<Car> Cars { get; set; }
         public DbSet<Users> Users { get; set; }
         public DbSet<Sale> Sale { get; set; }
 
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+        public LuckysDbContext(DbContextOptions<LuckysDbContext> options) : base(options)
         {
         }
+        public DbSet<User_Model> UserModel { get; set; }
     }
 
     public class Car  // Define your Car class here

@@ -1,6 +1,7 @@
 using Luckys_Cars ;
 using Luckys_Cars.Components;
 using Microsoft.EntityFrameworkCore;
+using Luckys_Cars.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,8 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlite("Data Source=app.db"));
+//Register Db Context
+builder.Services.AddDbContext<LuckysDbContext>(options =>
+    options.UseSqlite("Data Source=Luckys.db"));
 
 var app = builder.Build();
 
@@ -29,5 +31,7 @@ app.UseAntiforgery();
 app.MapStaticAssets();
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
+app.MapBlazorHub();
+app.MapFallbackToPage("/_Host");
 
 app.Run();
