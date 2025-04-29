@@ -14,5 +14,7 @@ public class Sale_Model
     public int UserId { get; set; }   //foreign key
     [ForeignKey("UserId")]
     public User_Model? User { get; set; }
+    public bool Completed { get; set; }
+    public List<Cars_Model> Items { get; set; } = new();
 
 }

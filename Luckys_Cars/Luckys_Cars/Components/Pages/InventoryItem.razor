@@ -4,6 +4,7 @@
 @using Luckys_Cars.Models
 @inject DataService DataService
 @inject NavigationManager Navigation
+@inject CartService CartService
 @rendermode InteractiveServer
 
 <style>
@@ -151,9 +152,20 @@ else
         StateHasChanged();
     }
 
-    private void AddToCart()
+    private async Task AddToCart()
     {
-        // Add your add-to-cart logic here
-        Console.WriteLine($"Added {Car?.Make} {Car?.Model} to cart!");
+        if (Car == null)
+            return;
+
+        var result = await CartService.AddItemToCartAsync(Car);
+
+        if (result)
+        {
+        }
+        else
+        {
+            // Optionally show error
+            Console.WriteLine("Failed to add to cart. User might not be logged in.");
+        }
     }
 }

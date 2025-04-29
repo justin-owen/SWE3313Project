@@ -2,6 +2,9 @@ using Luckys_Cars ;
 using Luckys_Cars.Components;
 using Microsoft.EntityFrameworkCore;
 using Luckys_Cars.Data;
+using Microsoft.AspNetCore.Components.Authorization;
+using System.Security.Claims;
+using Blazored.LocalStorage;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +16,16 @@ builder.Services.AddRazorComponents()
 builder.Services.AddDbContext<LuckysDbContext>(options =>
     options.UseSqlite("Data Source=Luckys.db"));
 builder.Services.AddScoped<DataService>();
+
+builder.Services.AddAuthorizationCore();
+builder.Services.AddScoped<CartService>();
+builder.Services.AddBlazoredLocalStorage();
+builder.Services.AddScoped<Authenticator>();
+builder.Services.AddScoped<AuthenticationStateProvider>(provider => provider.GetRequiredService<Authenticator>());
+builder.Services.AddAuthorizationCore();
+
+
+
 
 var app = builder.Build();
 
@@ -35,6 +48,4 @@ app.UseAntiforgery();
 app.MapStaticAssets();
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
-//app.MapRazorPages();
-
 app.Run();

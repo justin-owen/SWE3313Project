@@ -75,6 +75,9 @@ namespace Luckys_Cars.Migrations
                     b.Property<int?>("SaleId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int?>("Sale_ModelSaleId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Transmission")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -85,6 +88,8 @@ namespace Luckys_Cars.Migrations
                     b.HasKey("ItemId");
 
                     b.HasIndex("SaleId");
+
+                    b.HasIndex("Sale_ModelSaleId");
 
                     b.ToTable("Cars");
 
@@ -151,6 +156,9 @@ namespace Luckys_Cars.Migrations
                 {
                     b.Property<int>("SaleId")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("Completed")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("InvPrice")
@@ -239,6 +247,10 @@ namespace Luckys_Cars.Migrations
                         .WithMany()
                         .HasForeignKey("SaleId");
 
+                    b.HasOne("Luckys_Cars.Models.Sale_Model", null)
+                        .WithMany("Items")
+                        .HasForeignKey("Sale_ModelSaleId");
+
                     b.Navigation("Sale");
                 });
 
@@ -251,6 +263,11 @@ namespace Luckys_Cars.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Luckys_Cars.Models.Sale_Model", b =>
+                {
+                    b.Navigation("Items");
                 });
 #pragma warning restore 612, 618
         }

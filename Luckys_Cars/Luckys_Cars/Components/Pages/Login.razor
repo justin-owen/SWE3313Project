@@ -4,6 +4,8 @@
     @rendermode InteractiveServer
     @inject NavigationManager Navigation
     @inject DataService DataService
+    @inject Authenticator AuthProvider
+
     <PageTitle>Login</PageTitle>
 
 
@@ -43,33 +45,44 @@
 
 
     @code {
-            
-        
-    //  Stores text input
-    private string userIdInput { get; set; }
-    private string userPassword { get; set; }
-    
-    //Error message
-    private string loginError = String.Empty;
+        private string userIdInput = string.Empty;
+        private string userPassword = string.Empty;
+        private string? loginError;
 
+        private bool isLoading = false; // Optional loading indicator
 
-    //Button Press
-    private async Task AttemptLogin()
-    {
-        var users = await DataService.GetUsers();
-        var loginAttempt = users.FirstOrDefault(u =>
-            (u.Username.Equals(userIdInput, StringComparison.Ordinal)
-             || u.Email.Equals(userIdInput, StringComparison.Ordinal))
-            && u.Password == userPassword);
-        if (loginAttempt != null)
+        private async Task AttemptLogin()
         {
-            Navigation.NavigateTo("/Inventory");
-        }
-        else
-        {
-            loginError = "Incorrect username or password";
-        }
+            isLoading = true;
+            loginError = null;
 
-    }
+            try
+            {
+                var users = await DataService.GetUsers();
 
+                var loginAttempt = users.FirstOrDefault(u =>
+                    (u.Username.Equals(userIdInput.Trim(), StringComparison.OrdinalIgnoreCase)
+                     || u.Email.Equals(userIdInput.Trim(), StringComparison.OrdinalIgnoreCase))
+                    && u.Password == userPassword);
+
+                if (loginAttempt != null)
+                {
+                    await AuthProvider.SignInAsync(loginAttempt);
+                    Navigation.NavigateTo("/Inventory", forceLoad: true);
+                }
+                else
+                {
+                    loginError = "Incorrect username or password.";
+                }
+            }
+            catch (Exception ex)
+            {
+                loginError = "An error occurred while trying to login.";
+                Console.WriteLine($"Login error: {ex.Message}");
+            }
+            finally
+            {
+                isLoading = false;
+            }
+        }
     }
