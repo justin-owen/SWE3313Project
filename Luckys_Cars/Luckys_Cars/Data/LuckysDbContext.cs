@@ -114,16 +114,14 @@ namespace Luckys_Cars.Data
             
             //Key relationships
             modelBuilder.Entity<Cars_Model>()
-                .HasOne(c => c.Sale) // One car is linked to one sale (SaleId)
-                .WithMany() // Many cars can be linked to one sale, but no navigation back to Cars from Sale is required
-                .HasForeignKey(c => c.SaleId);  // ForeignKey is SaleId in Cars_Model
-
-            // Define the foreign key relationship between Sale and User
+                .HasOne(c => c.Sale)
+                .WithMany() 
+                .HasForeignKey(c => c.SaleId);  
             modelBuilder.Entity<Sale_Model>()
-                .HasOne(s => s.User)  // One sale is linked to one user
-                .WithMany()  // One user can have many sales, but no navigation back from User to Sales
-                .HasForeignKey(s => s.UserId)  // ForeignKey is UserId in Sale_Model
-                .OnDelete(DeleteBehavior.Cascade);  // When a User is deleted, related Sales are deleted
+                .HasMany(s => s.Items)
+                .WithOne(c => c.Sale)
+                .HasForeignKey(c => c.SaleId)
+                .OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<CarPhotos_Model>()
                 .HasOne(cp => cp.Car)

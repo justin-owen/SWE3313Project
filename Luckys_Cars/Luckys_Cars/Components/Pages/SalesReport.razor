@@ -1,0 +1,51 @@
+﻿@page "/SalesReport"
+@inject LuckysDbContext LuckysDbContext
+@layout MainLayout
+@rendermode InteractiveServer
+<style>
+    body,article,main{
+        color: black;
+    }
+</style>
+<div style="height: 6vh;"></div>
+<div class="mx-5 bg-white flex-grow-1 w-50 h-75 rounded p-4 overflow-auto">
+    <h4 class="text-dark mb-4">Completed Sales Report</h4>
+
+    @if (CompletedSales == null)
+    {
+        <p>Loading sales...</p>
+    }
+    else if (!CompletedSales.Any())
+    {
+        <p>No completed sales found.</p>
+    }
+    else
+    {
+        <div class="list-group">
+            @foreach (var sale in CompletedSales)
+            {
+                <div class="list-group-item list-group-item-action mb-2 rounded shadow-sm">
+                    <h6 class="mb-1 text-primary">Sale ID: @sale.SaleId</h6>
+                    <p class="mb-0 text-dark">User ID: @sale.UserId</p>
+                    <p class="mb-0 text-dark">Total Cars Sold: @sale.Items.Count()</p>
+                    <p class="mb-0 text-dark">Total Sale: @((sale.Items.Sum(i => i.Cost) / 100.0m).ToString("C"))</p>
+                    </div>
+            }
+        </div>
+    }
+</div>
+
+@code {
+    private List<Sale_Model>? CompletedSales;
+
+    protected override async Task OnInitializedAsync()
+    {
+        CompletedSales = await LuckysDbContext.Sale
+            .Include(s => s.Items)
+            .Where(s => s.Completed)
+            .OrderByDescending(s => s.SaleId)
+            .ToListAsync();
+
+    }
+
+}

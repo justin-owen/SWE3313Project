@@ -12,7 +12,7 @@
             <h1 style="font-family: Norwester, Arial, sans-serif">Lucky's Cars</h1>
         </div>
         <div class="d-flex gap-3 h-100 me-2">
-            <NavLink>
+            <NavLink href="/SalesReport">
                 <img src="/images/Report-Icon.png" style="max-height: 90%;height: auto" alt="Sales-Report-Icon"/>
             </NavLink>
             <NavLink>
@@ -21,10 +21,18 @@
             <NavLink href="/Inventory">
                 <img src="/images/Home-Icon.png" style="max-height: 90%; height: auto" alt="Home-Icon"/>
             </NavLink>
-            <button class="btn btn-primary" @onclick="NavigateToCart" disabled="@(!HasCart)">
-                Go To Cart (Debug)
-            </button>
 
+
+            @if (HasCart)
+            {
+                <NavLink href="/Cart">
+                    <img src="/images/Cart-Icon.png" style="max-height: 90%; height: auto;" alt="Cart-Icon" />
+                </NavLink>
+            }
+            else
+            {
+                <img src="/images/Cart-Icon.png" style="max-height: 90%; height: auto; opacity: 0.5;" alt="Cart-Icon" />
+            }
 
             <NavLink>
                 <img src="/images/Profile-Icon.png" style="max-height: 90%; height: auto" alt="Profile-Icon"/>
