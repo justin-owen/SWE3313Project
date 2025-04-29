@@ -1,0 +1,159 @@
+﻿@page "/Inventory/Item/{ItemId:int}"
+@layout MainLayout
+@using Luckys_Cars.Data
+@using Luckys_Cars.Models
+@inject DataService DataService
+@inject NavigationManager Navigation
+@rendermode InteractiveServer
+
+<style>
+    Body{
+        background-color: white;
+        color: black;
+    }
+</style>
+
+<div style="height: 10vh;"></div>
+
+@if (Car == null)
+{
+    <p class="text-center">Loading car details...</p>
+}
+else
+{
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-md-7">
+                <div class="position-relative">
+                    @if (Photos != null && Photos.Count > 0)
+                    {
+                        <div class="d-flex justify-content-center align-items-center" style="height: 400px;">
+                            <img src="@GetCurrentImage()"
+                                 class="img-fluid border"
+                                 style="max-width: 90%; max-height: 100%; object-fit: contain;"
+                                 alt="Car Photo" />
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="text-center text-muted">
+                            <p>No Image Available</p>
+                        </div>
+                    }
+
+                    @if (Photos.Count > 1)
+                    {
+                        <button class="btn btn-dark position-absolute top-50 start-0 translate-middle-y" style="z-index: 9999;" @onclick="PreviousSlide">
+                            &#9664;
+                        </button>
+                        <button class="btn btn-dark position-absolute top-50 end-0 translate-middle-y" style="z-index: 9999;" @onclick="NextSlide">
+                            &#9654;
+                        </button>
+                    }
+                </div>
+
+                @if (Photos.Count > 1)
+                {
+                    <div class="d-flex justify-content-center mt-3 gap-2">
+                        @for (int i = 0; i < Photos.Count; i++)
+                        {
+                            <img src="@GetCurrentImage(i)"
+                                 class="thumbnail-img border @(i == CurrentPhotoIndex ? "border-primary" : "")"
+                                 style="width: 80px; height: 60px; object-fit: cover; cursor: pointer;" />
+                        }
+                    </div>
+                }
+            </div>
+
+            <!-- Right Side: Details -->
+            <div class="col-md-5">
+                <h2 class="fw-bold" style="color: black">@Car.Year @Car.Make @Car.Model</h2>
+                <h4 class="text-primary mb-3">Price: @((Car.Cost / 100.0m).ToString("C"))</h4>
+
+                <p><strong>Exterior:</strong> @Car.ExtColor</p>
+                <p><strong>Interior:</strong> @Car.IntColor</p>
+                <p><strong>Wheel Train:</strong> Front Wheel Drive</p> <!-- Assuming fixed, can adjust later -->
+                <p><strong>Engine:</strong> @Car.Engine</p>
+                <p><strong>Transmission:</strong> @Car.Transmission</p>
+                <p><strong>Extra Features:</strong> @Car.Features</p>
+
+                <div class="mt-4">
+                    <button class="btn btn-success btn-lg px-5 py-2 fw-bold" @onclick="AddToCart">Add To Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public int ItemId { get; set; }
+
+    private Cars_Model? Car;
+    private List<CarPhotos_Model> Photos = new();
+    private int CurrentPhotoIndex = 0;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Car = await DataService.GetCarById(ItemId);
+        Photos = await DataService.GetPhotosByCar(ItemId);
+    }
+
+    private string GetCurrentImage(int? index = null)
+    {
+        int photoIndex = index ?? CurrentPhotoIndex;
+
+        if (Photos != null && Photos.Count > 0 && photoIndex >= 0 && photoIndex < Photos.Count)
+        {
+            var imageData = Photos[photoIndex]?.ImageData;
+            if (imageData != null && imageData.Length > 0)
+            {
+                return $"data:image/png;base64,{Convert.ToBase64String(imageData)}";
+            }
+        }
+
+        return "/images/no-image.png";
+    }
+
+    private string GetThumbnailImage(int index)
+    {
+        if (Photos != null && index >= 0 && index < Photos.Count)
+        {
+            return $"data:image/png;base64,{Convert.ToBase64String(Photos[index].ImageData)}";
+        }
+        else
+        {
+            return "/images/no-image.png";
+        }
+    }
+
+    private void NextSlide()
+    {
+        if (Photos != null && Photos.Count > 0)
+        {
+            CurrentPhotoIndex = (CurrentPhotoIndex + 1) % Photos.Count;
+            StateHasChanged();
+        }
+    }
+
+    private void PreviousSlide()
+    {
+        if (Photos != null && Photos.Count > 0)
+        {
+            CurrentPhotoIndex = (CurrentPhotoIndex - 1 + Photos.Count) % Photos.Count;
+            StateHasChanged();
+        }
+    }
+
+    private void SelectSlide(int index)
+    {
+        CurrentPhotoIndex = index;
+        StateHasChanged();
+    }
+
+    private void AddToCart()
+    {
+        // Add your add-to-cart logic here
+        Console.WriteLine($"Added {Car?.Make} {Car?.Model} to cart!");
+    }
+}

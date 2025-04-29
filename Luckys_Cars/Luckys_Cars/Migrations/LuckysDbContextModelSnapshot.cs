@@ -16,6 +16,26 @@ namespace Luckys_Cars.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.4");
 
+            modelBuilder.Entity("Luckys_Cars.Models.CarPhotos_Model", b =>
+                {
+                    b.Property<int>("ImageId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<byte[]>("ImageData")
+                        .IsRequired()
+                        .HasColumnType("BLOB");
+
+                    b.Property<int>("ItemId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("ImageId");
+
+                    b.HasIndex("ItemId");
+
+                    b.ToTable("CarPhotos");
+                });
+
             modelBuilder.Entity("Luckys_Cars.Models.Cars_Model", b =>
                 {
                     b.Property<int>("ItemId")
@@ -200,6 +220,17 @@ namespace Luckys_Cars.Migrations
                             Password = "SecretPassword3313",
                             Username = "JAdkiss1"
                         });
+                });
+
+            modelBuilder.Entity("Luckys_Cars.Models.CarPhotos_Model", b =>
+                {
+                    b.HasOne("Luckys_Cars.Models.Cars_Model", "Car")
+                        .WithMany()
+                        .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Car");
                 });
 
             modelBuilder.Entity("Luckys_Cars.Models.Cars_Model", b =>

@@ -12,6 +12,7 @@ namespace Luckys_Cars.Data
         public DbSet<Cars_Model> Cars { get; set; }
         public DbSet<User_Model> Users { get; set; }
         public DbSet<Sale_Model> Sale { get; set; }
+        public DbSet<CarPhotos_Model> CarPhotos { get; set; }
 
         public LuckysDbContext(DbContextOptions<LuckysDbContext> options) : base(options)
         {
@@ -124,7 +125,10 @@ namespace Luckys_Cars.Data
                 .HasForeignKey(s => s.UserId)  // ForeignKey is UserId in Sale_Model
                 .OnDelete(DeleteBehavior.Cascade);  // When a User is deleted, related Sales are deleted
 
-            
+            modelBuilder.Entity<CarPhotos_Model>()
+                .HasOne(cp => cp.Car)
+                .WithMany()
+                .HasForeignKey(cp => cp.ItemId);
             
             base.OnModelCreating(modelBuilder);
         }

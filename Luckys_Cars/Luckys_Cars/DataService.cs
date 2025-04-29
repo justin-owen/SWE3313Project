@@ -24,6 +24,12 @@ public class DataService
         await _context.SaveChangesAsync();
     }
     
+    public async Task<Cars_Model?> GetCarById(int itemId)
+    {
+        return await _context.Cars
+            .FirstOrDefaultAsync(c => c.ItemId == itemId);
+    }
+    
     public async Task<List<User_Model>> GetUsers()
     {
         return await _context.Users.ToListAsync();
@@ -61,6 +67,47 @@ public class DataService
     public async Task AddSale(Sale_Model sale)
     {
         await _context.SaveChangesAsync();
+    }
+
+    public async Task<List<CarPhotos_Model>> GetPhotos()
+    {
+        return await _context.CarPhotos.ToListAsync();
+    }
+
+
+    public async Task<List<CarPhotos_Model>> GetPhotosByCar(int itemId)
+    {
+        return await _context.CarPhotos
+            .Where(p => p.ItemId == itemId)
+            .ToListAsync();
+    }
+
+
+    public async Task AddPhoto(CarPhotos_Model photo)
+    {
+        _context.CarPhotos.Add(photo);
+        await _context.SaveChangesAsync();
+    }
+
+
+    public async Task<bool> DeletePhoto(int photoId)
+    {
+        var photo = await _context.CarPhotos.FindAsync(photoId);
+        if (photo == null)
+        {
+            return false;
+        }
+        _context.CarPhotos.Remove(photo);
+        await _context.SaveChangesAsync();
+        return true;
+    }
+    
+    public async Task<CarPhotos_Model?> GetPrimaryPhoto(int itemId)
+    {
+        return await _context.CarPhotos
+            .Where(p => p.ItemId == itemId)
+            .OrderBy(p => p.ImageId) // You can change this to another logic if you want
+            .FirstOrDefaultAsync();
     }
     
 }

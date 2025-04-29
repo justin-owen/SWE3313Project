@@ -2,10 +2,26 @@ html, body {
     background-color: #0A1B2D;
     font-family: Lato,sans-serif;
     color: white;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    
 }
-
-.content {
-    padding-top: 1.1rem;
+page{
+    margin: 0;
+    padding: 0;
+}
+article{
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+}
+content {
+    margin: 0;
+    padding: 0;
 }
 
 h1:focus {

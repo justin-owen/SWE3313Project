@@ -160,7 +160,10 @@
 }
 
 body {
-  margin: 0;
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
   font-family: var(--bs-body-font-family);
   font-size: var(--bs-body-font-size);
   font-weight: var(--bs-body-font-weight);
@@ -172,7 +175,7 @@ body {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 .invBody{
-  background-color: var(--bs-inventory-body-bg);
+  background-color: var(#fff);
   
 }
 hr {
@@ -2999,6 +3002,14 @@ textarea.form-control-lg {
   background-color: var(--bs-btn-hover-bg);
   border-color: var(--bs-btn-hover-border-color);
 }
+.grow-on-hover {
+  transition: transform 0.3s ease;
+}
+
+.grow-on-hover:hover {
+  transform: scale(1.05);
+}
+
 .btn-check + .btn:hover {
   color: var(--bs-btn-color);
   background-color: var(--bs-btn-bg);
@@ -8842,12 +8853,12 @@ textarea.form-control-lg {
 
 .bg-white {
   --bs-bg-opacity: 1;
-  background-color: rgba(var(--bs-white-rgb), var(--bs-bg-opacity)) !important;
+  background-color: #fff !important;
 }
 
 .bg-body {
   --bs-bg-opacity: 1;
-  background-color: rgba(var(--bs-body-bg-rgb), var(--bs-bg-opacity)) !important;
+  background-color: var(--bs-body-bg) !important;
 }
 
 .bg-transparent {
