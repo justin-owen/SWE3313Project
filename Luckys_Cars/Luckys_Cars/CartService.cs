@@ -46,12 +46,10 @@ public class CartService
         }
 
         // Only add if not already part of a Sale
-        if (car.SaleId != sale.SaleId)
-        {
-            car.SaleId = sale.SaleId;
-            await _dbContext.SaveChangesAsync();
-            Console.WriteLine($"[DEBUG] Added ItemId {itemId} to SaleId {sale.SaleId}");
-        }
+        car.SaleId = sale.SaleId;
+        await _dbContext.SaveChangesAsync();
+        Console.WriteLine($"[DEBUG] Added ItemId {itemId} to SaleId {sale.SaleId}");
+
 
         return true;
     }

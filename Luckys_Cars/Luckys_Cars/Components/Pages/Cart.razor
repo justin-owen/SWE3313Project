@@ -4,6 +4,7 @@
 @using Luckys_Cars.Models
 @inject NavigationManager Navigation
 @inject CartService CartService
+@inject CartStateService CartStateService
 @inject DataService DataService
 @inject Authenticator Authenticator
 
@@ -15,12 +16,12 @@
         margin: 0;
         padding: 0;
         height: 100vh;
-        display: flex;
         justify-content: center;
         align-items: center;
     }
 </style>
 <div style="height: 10vh;"></div>
+<h1 class="text-center" style="color: #425163FF; font-family: Norwester, Arial, sans-serif">Summary</h1>
 @if (IsLoading)
 {
     <div class="text-center mt-5">
@@ -36,19 +37,38 @@ else if (Sale == null || !Sale.Items.Any())
 }
 else
 {
-    <div class="bg-primary container-fluid d-flex justify-content-center align-items-center py-4 rounded border g-2">
+    <div class="container-fluid py-5 d-flex justify-content-center">
+    <div class="bg-primary border rounded p-4" style="max-width: 1200px; width: 100%;">
+    <div class="row g-5 m-0 justify-content-center align-items-center">
         <div class="row g-5 m-0 justify-content-center align-items-center">
-            <!-- Left: Car Display -->
-            <div class="col-md-6 text-center justify-content-center " style="max-width: 400px">
-                @{
-                    var car = Sale.Items[CurrentCarouselIndex];
-                    var imageSrc = PrimaryPhotos.TryGetValue(car.ItemId, out var src) ? src : "/images/no-image.png";
-                }
-                <img src="@imageSrc" class="img-fluid mb-3 border" style="max-height: 300px; object-fit: contain; border-radius: 10px;" alt="Car Image" />
-                <div class="bg-grey text-white p-3 rounded text-start row" style="color: white">
-                    <strong>@car.Year @car.Make @car.Model</strong><br />
-                    <span>Price: @((car.Cost / 100).ToString("C0"))</span><br />
-                    <span>Features: @car.Features</span>
+
+            <!-- Left: Car Display Column -->
+            <div class="col-md-6">
+                <!-- Carousel Display -->
+                <div class="position-relative mb-3" style="height: 300px;">
+                    @for (int i = 0; i < Sale.Items.Count; i++)
+                    {
+                        var car = Sale.Items[i];
+                        var imageSrc = PrimaryPhotos.TryGetValue(car.ItemId, out var src) ? src : "/images/no-image.png";
+
+                        <div class="position-absolute top-0 start-0 w-100 h-100 @(i == CurrentCarouselIndex ? "" : "d-none")">
+                            <img src="@imageSrc"
+                                 class="w-100 h-100 rounded"
+                                 style="object-fit: contain;"
+                                 alt="Car Image" />
+                            <div class="mt-2 bg-grey border rounded text-center text-white">
+                                <strong>@car.Year @car.Make @car.Model</strong><br />
+                                <span>@((car.Cost / 100.0m).ToString("C0"))</span>
+                            </div>
+                        </div>
+                    }
+
+                    <button class="btn btn-dark position-absolute top-50 start-0 translate-middle-y z-1" @onclick="PreviousSlide">
+                        <span class="carousel-control-prev-icon"></span>
+                    </button>
+                    <button class="btn btn-dark position-absolute top-50 end-0 translate-middle-y z-1" @onclick="NextSlide">
+                        <span class="carousel-control-next-icon"></span>
+                    </button>
                 </div>
             </div>
 
@@ -82,6 +102,9 @@ else
                 </div>
             </div>
         </div>
+
+    </div>
+    </div>
     </div>
 }
 
@@ -89,7 +112,6 @@ else
     private Sale_Model? Sale;
     private Dictionary<int, string> PrimaryPhotos = new();
     private bool IsLoading = true;
-    private int CurrentCarouselIndex = 0;
 
     protected override async Task OnInitializedAsync()
     {
@@ -150,9 +172,13 @@ else
             // Reload updated sale
             Sale = await CartService.GetCurrentSaleAsync();
 
-            if (Sale == null)
+            if (Sale == null || !Sale.Items.Any())
             {
                 Console.WriteLine("[DEBUG] Reloaded Sale is null after removal.");
+                CartStateService.SetCartStatus(false);
+                
+                Navigation.NavigateTo("/Inventory");
+                return;
             }
             else
             {
@@ -185,6 +211,24 @@ else
         else
         {
             Console.WriteLine("[DEBUG] Failed to remove item from cart.");
+        }
+        
+    }
+    private int CurrentCarouselIndex = 0;
+
+    private void PreviousSlide()
+    {
+        if (Sale != null && Sale.Items.Count > 0)
+        {
+            CurrentCarouselIndex = (CurrentCarouselIndex - 1 + Sale.Items.Count) % Sale.Items.Count;
+        }
+    }
+
+    private void NextSlide()
+    {
+        if (Sale != null && Sale.Items.Count > 0)
+        {
+            CurrentCarouselIndex = (CurrentCarouselIndex + 1) % Sale.Items.Count;
         }
     }
 
