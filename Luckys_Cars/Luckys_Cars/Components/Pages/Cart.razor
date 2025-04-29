@@ -1,0 +1,133 @@
+﻿@page "/Cart"
+@layout MainLayout
+@inject NavigationManager Navigation
+@using Luckys_Cars.Models
+@inject CartService CartService
+@inject Authenticator AuthProvider
+@inject DataService
+@rendermode InteractiveServer
+
+@if (IsLoading)
+{
+    <div class="text-center mt-5">
+        <h4>Loading your cart...</h4>
+    </div>
+}
+else if (Sale != null && Sale.Items.Any())
+{
+    <div class="container mt-5">
+        <div class="row">
+            <!-- Left: Carousel -->
+            <div class="col-md-7">
+                <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        @for (int i = 0; i < Sale.Items.Count; i++)
+                        {
+                            var car = Sale.Items[i];
+                            <div class="carousel-item @(i == 0 ? "active" : "")">
+                                <img src="@GetCarFirstImage(car.ItemId)" class="d-block w-100" style="height: 400px; object-fit: contain;" alt="Car Image">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h5>@car.Year @car.Make @car.Model</h5>
+                                    <p>@(car.Cost / 100.0m).ToString("C")</p>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right: Scrollable List -->
+            <div class="col-md-5 d-flex flex-column">
+                <div style="height: 400px; overflow-y: auto; border: 1px solid #ccc; padding: 10px;">
+                    @foreach (var car in Sale.Items)
+                    {
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>@car.Year @car.Make @car.Model</span>
+                            <span>@(car.Cost / 100.0m).ToString("C")</span>
+                        </div>
+                    }
+                </div>
+
+                <div class="mt-4">
+                    <div class="d-flex justify-content-between">
+                        <strong>Subtotal:</strong>
+                        <span>@Subtotal.ToString("C")</span>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <strong>Delivery & Fees:</strong>
+                        <span>@DeliveryFee.ToString("C")</span>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <strong>Tax:</strong>
+                        <span>@Tax.ToString("C")</span>
+                    </div>
+                    <hr />
+                    <div class="d-flex justify-content-between">
+                        <h5>Total:</h5>
+                        <h5>@Total.ToString("C")</h5>
+                    </div>
+                    <button class="btn btn-success w-100 mt-3" @onclick="Checkout">Checkout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    private Sale_Model? Sale;
+    private decimal Subtotal;
+    private decimal Tax;
+    private decimal Total;
+    private decimal DeliveryFee = 2000m / 100.0m; // $20 delivery fee
+    private bool IsLoading = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        if (user.Identity != null && user.Identity.IsAuthenticated)
+        {
+            Sale = await CartService.GetCurrentSaleAsync();
+
+            if (Sale != null && Sale.Items.Any())
+            {
+                Subtotal = Sale.Items.Sum(car => car.Cost) / 100.0m;
+                Tax = Subtotal * 0.05m; // 5% tax
+                Total = Subtotal + Tax + DeliveryFee;
+            }
+        }
+
+        IsLoading = false;
+    }
+
+    private async Task Checkout()
+    {
+        if (Sale != null)
+        {
+            await CartService.CompleteSaleAsync(Sale.SaleId);
+            Sale = null;
+            Navigation.NavigateTo("/Inventory");
+        }
+    }
+
+    private string GetCarFirstImage(int carId)
+    {
+        // Assuming CartService handles fetching first image from DataService internally
+        var photo = await DataService.GetPrimaryPhoto(itemId);
+
+        if (photos != null && photos.Any())
+        {
+            return $"data:image/png;base64,{Convert.ToBase64String(photos[0].ImageData)}";
+        }
+        return "/images/no-image.png";
+    }
+}
