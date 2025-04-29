@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Luckys_Cars")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ca88b2bb4d06573eb86ccb53b7b1a178c3a3733c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6a4c0c90deb058a48088e43958354e678fca6d75")]
 [assembly: System.Reflection.AssemblyProductAttribute("Luckys_Cars")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Luckys_Cars")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

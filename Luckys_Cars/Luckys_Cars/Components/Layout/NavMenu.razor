@@ -1,4 +1,10 @@
-﻿<nav class="navbar navbar-expand-lg fixed-top bg-grey border" height="">
+﻿@inject CartService CartService
+@inject CartStateService CartStateService
+@inject NavigationManager Navigation
+@inject Authenticator AuthProvider
+@rendermode InteractiveServer
+
+<nav class="navbar navbar-expand-lg fixed-top bg-grey border" height="">
     
     <div class="d-flex justify-content-between align-items-center" style="height: 100%; width: 100%">
         <div class="d-flex align-items-center gap-3 h-100">
@@ -15,9 +21,11 @@
             <NavLink href="/Inventory">
                 <img src="/images/Home-Icon.png" style="max-height: 90%; height: auto" alt="Home-Icon"/>
             </NavLink>
-            <NavLink>
-                <img src="/images/Cart-Icon.png" style="max-height: 90%; height: auto" alt="Cart-Icon"/>
-            </NavLink>
+            <button class="btn btn-primary" @onclick="NavigateToCart" disabled="@(!HasCart)">
+                Go To Cart (Debug)
+            </button>
+
+
             <NavLink>
                 <img src="/images/Profile-Icon.png" style="max-height: 90%; height: auto" alt="Profile-Icon"/>
             </NavLink>
@@ -27,3 +35,69 @@
     </div>
 
 </nav>
+@code{private bool HasCart = false;
+    private bool isSubscribed = false;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender && !isSubscribed)
+        {
+            CartStateService.OnChange += UpdateCartStatus;
+            isSubscribed = true;
+
+            Console.WriteLine("[DEBUG] NavMenu subscribed to CartStateService.OnChange");
+
+            // 🔥 NEW: Check if cart already exists on startup
+            var authState = await AuthProvider.GetAuthenticationStateAsync();
+            var user = authState.User;
+
+            if (user.Identity != null && user.Identity.IsAuthenticated)
+            {
+                var sale = await CartService.GetCurrentSaleAsync();
+                if (sale != null && sale.Items.Any())
+                {
+                    Console.WriteLine("[DEBUG] NavMenu found existing cart on startup.");
+                    CartStateService.SetCartStatus(true);
+                }
+            }
+
+            HasCart = CartStateService.HasCart;
+            await InvokeAsync(StateHasChanged);
+        }
+    }
+
+    private void UpdateCartStatus()
+    {
+        Console.WriteLine($"[DEBUG] UpdateCartStatus fired! HasCart now: {CartStateService.HasCart}");
+        HasCart = CartStateService.HasCart;
+        InvokeAsync(StateHasChanged);
+    }
+
+    private string GetCartStyle()
+    {
+        Console.WriteLine($"[DEBUG] GetCartStyle called. HasCart = {HasCart}");
+        return $"pointer-events: {(HasCart ? "auto" : "none")}; opacity: {(HasCart ? "1" : "0.5")};";
+    }
+
+    public void Dispose()
+    {
+        if (isSubscribed)
+        {
+            CartStateService.OnChange -= UpdateCartStatus;
+            Console.WriteLine("[DEBUG] NavMenu unsubscribed from CartStateService.OnChange");
+        }
+    }
+
+    private void NavigateToCart()
+    {
+        if (HasCart)
+        {
+            Navigation.NavigateTo("/Cart");
+        }
+        else
+        {
+            Console.WriteLine("[DEBUG] Attempted to navigate without cart.");
+        }
+    }
+
+}

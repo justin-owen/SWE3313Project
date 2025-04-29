@@ -5,6 +5,7 @@
 @inject DataService DataService
 @inject NavigationManager Navigation
 @inject CartService CartService
+@inject CartStateService CartStateService
 @rendermode InteractiveServer
 
 <style>
@@ -157,10 +158,12 @@ else
         if (Car == null)
             return;
 
-        var result = await CartService.AddItemToCartAsync(Car);
+        var result = await CartService.AddItemToCartAsync(ItemId);
 
         if (result)
         {
+            CartStateService.SetCartStatus(true);
+
         }
         else
         {

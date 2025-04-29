@@ -11,6 +11,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+builder.Services.AddAuthentication("Identity.Application")
+    .AddCookie("Identity.Application", options => { options.LoginPath = "/"; });
+builder.Services.AddAuthorization();
+
 
 //Register Db Context
 builder.Services.AddDbContext<LuckysDbContext>(options =>
@@ -22,7 +26,7 @@ builder.Services.AddScoped<CartService>();
 builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddScoped<Authenticator>();
 builder.Services.AddScoped<AuthenticationStateProvider>(provider => provider.GetRequiredService<Authenticator>());
-builder.Services.AddAuthorizationCore();
+builder.Services.AddScoped<CartStateService>();
 
 
 

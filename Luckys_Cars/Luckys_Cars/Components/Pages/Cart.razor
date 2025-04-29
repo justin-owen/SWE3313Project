@@ -1,80 +1,84 @@
 ﻿@page "/Cart"
 @layout MainLayout
-@inject NavigationManager Navigation
+@attribute [Authorize]
 @using Luckys_Cars.Models
+@inject NavigationManager Navigation
 @inject CartService CartService
-@inject Authenticator AuthProvider
-@inject DataService
-@rendermode InteractiveServer
+@inject DataService DataService
+@inject Authenticator Authenticator
 
+@rendermode InteractiveServer
+<style>
+    body {
+        background-color: #0b1c2c;
+        color: white;
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+<div style="height: 10vh;"></div>
 @if (IsLoading)
 {
     <div class="text-center mt-5">
         <h4>Loading your cart...</h4>
     </div>
 }
-else if (Sale != null && Sale.Items.Any())
+else if (Sale == null || !Sale.Items.Any())
 {
-    <div class="container mt-5">
-        <div class="row">
-            <!-- Left: Carousel -->
-            <div class="col-md-7">
-                <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                        @for (int i = 0; i < Sale.Items.Count; i++)
+    <div class="text-center mt-5">
+        <h4>Your cart is empty.</h4>
+        <button class="btn btn-primary mt-3" @onclick="GoToInventory">Browse Cars</button>
+    </div>
+}
+else
+{
+    <div class="bg-primary container-fluid d-flex justify-content-center align-items-center py-4 rounded border g-2">
+        <div class="row g-5 m-0 justify-content-center align-items-center">
+            <!-- Left: Car Display -->
+            <div class="col-md-6 text-center justify-content-center " style="max-width: 400px">
+                @{
+                    var car = Sale.Items[CurrentCarouselIndex];
+                    var imageSrc = PrimaryPhotos.TryGetValue(car.ItemId, out var src) ? src : "/images/no-image.png";
+                }
+                <img src="@imageSrc" class="img-fluid mb-3 border" style="max-height: 300px; object-fit: contain; border-radius: 10px;" alt="Car Image" />
+                <div class="bg-grey text-white p-3 rounded text-start row" style="color: white">
+                    <strong>@car.Year @car.Make @car.Model</strong><br />
+                    <span>Price: @((car.Cost / 100).ToString("C0"))</span><br />
+                    <span>Features: @car.Features</span>
+                </div>
+            </div>
+
+            <!-- Right: Summary + Checkout -->
+            <div class="col-md-6">
+                <div class="summary-box h-100 d-flex flex-column">
+                    <h5 class="text-uppercase">Summary</h5>
+                    <div class="flex-grow-1 overflow-auto border rounded p-2 mb-3" style="max-height: 250px; background-color: #132c44;">
+                        @foreach (var item in Sale.Items)
                         {
-                            var car = Sale.Items[i];
-                            <div class="carousel-item @(i == 0 ? "active" : "")">
-                                <img src="@GetCarFirstImage(car.ItemId)" class="d-block w-100" style="height: 400px; object-fit: contain;" alt="Car Image">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h5>@car.Year @car.Make @car.Model</h5>
-                                    <p>@(car.Cost / 100.0m).ToString("C")</p>
+                            <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-2">
+                                <div>
+                                    <strong>@item.Make @item.Model</strong><br />
+                                    <small style="color: white">@item.Year</small>
+                                </div>
+
+                                <div class="d-flex flex-column align-items-end">
+                                    <div class="fw-bold text-light">
+                                        @((item.Cost / 100.0m).ToString("C0"))
+                                    </div>
+                                    <button class="btn btn-sm btn-outline-danger mt-1" @onclick="()=>RemoveFromCart(item.ItemId)">Remove</button>
                                 </div>
                             </div>
                         }
                     </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-                        <span class="carousel-control-next-icon"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Right: Scrollable List -->
-            <div class="col-md-5 d-flex flex-column">
-                <div style="height: 400px; overflow-y: auto; border: 1px solid #ccc; padding: 10px;">
-                    @foreach (var car in Sale.Items)
-                    {
-                        <div class="d-flex justify-content-between mb-2">
-                            <span>@car.Year @car.Make @car.Model</span>
-                            <span>@(car.Cost / 100.0m).ToString("C")</span>
-                        </div>
-                    }
-                </div>
-
-                <div class="mt-4">
-                    <div class="d-flex justify-content-between">
-                        <strong>Subtotal:</strong>
-                        <span>@Subtotal.ToString("C")</span>
-                    </div>
-                    <div class="d-flex justify-content-between">
-                        <strong>Delivery & Fees:</strong>
-                        <span>@DeliveryFee.ToString("C")</span>
-                    </div>
-                    <div class="d-flex justify-content-between">
-                        <strong>Tax:</strong>
-                        <span>@Tax.ToString("C")</span>
-                    </div>
-                    <hr />
-                    <div class="d-flex justify-content-between">
-                        <h5>Total:</h5>
-                        <h5>@Total.ToString("C")</h5>
-                    </div>
-                    <button class="btn btn-success w-100 mt-3" @onclick="Checkout">Checkout</button>
+                    <p>Subtotal: @((Sale.Items.Sum(i => i.Cost) / 100).ToString("N0"))</p>
+                    <p>Delivery & Fees: 2000</p>
+                    <p>Tax: 234.32</p>
+                    <p class="total mt-3">TOTAL: @(((Sale.Items.Sum(i => i.Cost) + 2000 + 23432) / 100.0m).ToString("N2"))</p>
+                    <button class="btn w-100 mt-3" style="background-color: darkgreen" @onclick="Checkout">Checkout</button>
                 </div>
             </div>
         </div>
@@ -83,51 +87,87 @@ else if (Sale != null && Sale.Items.Any())
 
 @code {
     private Sale_Model? Sale;
-    private decimal Subtotal;
-    private decimal Tax;
-    private decimal Total;
-    private decimal DeliveryFee = 2000m / 100.0m; // $20 delivery fee
+    private Dictionary<int, string> PrimaryPhotos = new();
     private bool IsLoading = true;
+    private int CurrentCarouselIndex = 0;
 
     protected override async Task OnInitializedAsync()
     {
-        var authState = await AuthProvider.GetAuthenticationStateAsync();
-        var user = authState.User;
+        IsLoading = true;
+        Sale = await CartService.GetCurrentSaleAsync();
 
-        if (user.Identity != null && user.Identity.IsAuthenticated)
+        if (Sale == null)
         {
-            Sale = await CartService.GetCurrentSaleAsync();
+            Console.WriteLine("DEBUG: Sale is null!");
+        }
+        else
+        {
+            Console.WriteLine($"DEBUG: Sale ID = {Sale.SaleId}, Item count = {Sale.Items.Count}");
+        }
 
-            if (Sale != null && Sale.Items.Any())
+        if (Sale != null && Sale.Items.Any())
+        {
+            foreach (var item in Sale.Items)
             {
-                Subtotal = Sale.Items.Sum(car => car.Cost) / 100.0m;
-                Tax = Subtotal * 0.05m; // 5% tax
-                Total = Subtotal + Tax + DeliveryFee;
+                var photoModel = await DataService.GetPrimaryPhoto(item.ItemId);
+                if (photoModel != null && photoModel.ImageData != null && photoModel.ImageData.Length > 0)
+                {
+                    PrimaryPhotos[item.ItemId] = $"data:image/png;base64,{Convert.ToBase64String(photoModel.ImageData)}";
+                }
+                else
+                {
+                    PrimaryPhotos[item.ItemId] = "/images/no-image.png";
+                }
             }
         }
 
         IsLoading = false;
     }
 
+
     private async Task Checkout()
     {
         if (Sale != null)
         {
             await CartService.CompleteSaleAsync(Sale.SaleId);
-            Sale = null;
             Navigation.NavigateTo("/Inventory");
         }
     }
 
-    private string GetCarFirstImage(int carId)
+    private void GoToInventory()
     {
-        // Assuming CartService handles fetching first image from DataService internally
-        var photo = await DataService.GetPrimaryPhoto(itemId);
-
-        if (photos != null && photos.Any())
-        {
-            return $"data:image/png;base64,{Convert.ToBase64String(photos[0].ImageData)}";
-        }
-        return "/images/no-image.png";
+        Navigation.NavigateTo("/Inventory");
     }
+    private async Task RemoveFromCart(int itemId)
+    {
+        bool result = await CartService.RemoveItemFromCartAsync(itemId);
+        Console.WriteLine("[DEBUG] Button Pressed");
+        if (result)
+        {
+            // Reload updated sale
+            Sale = await CartService.GetCurrentSaleAsync();
+
+            // Rebuild image dictionary
+            PrimaryPhotos.Clear();
+            foreach (var item in Sale.Items)
+            {
+                var photoModel = await DataService.GetPrimaryPhoto(item.ItemId);
+                if (photoModel != null && photoModel.ImageData?.Length > 0)
+                {
+                    PrimaryPhotos[item.ItemId] = $"data:image/png;base64,{Convert.ToBase64String(photoModel.ImageData)}";
+                }
+                else
+                {
+                    PrimaryPhotos[item.ItemId] = "/images/no-image.png";
+                }
+            }
+
+            StateHasChanged();
+        }
+        else
+        {
+            Console.WriteLine("Failed to remove item from cart.");
+        }
+    }
+
 }
