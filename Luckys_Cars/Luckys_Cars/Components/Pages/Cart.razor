@@ -140,34 +140,53 @@ else
     }
     private async Task RemoveFromCart(int itemId)
     {
+        Console.WriteLine($"[DEBUG] RemoveFromCart called for ItemId={itemId}");
+
         bool result = await CartService.RemoveItemFromCartAsync(itemId);
-        Console.WriteLine("[DEBUG] Button Pressed");
+        Console.WriteLine("[DEBUG] RemoveItemFromCartAsync completed.");
+
         if (result)
         {
             // Reload updated sale
             Sale = await CartService.GetCurrentSaleAsync();
 
+            if (Sale == null)
+            {
+                Console.WriteLine("[DEBUG] Reloaded Sale is null after removal.");
+            }
+            else
+            {
+                Console.WriteLine($"[DEBUG] Reloaded SaleId={Sale.SaleId}, Items.Count={Sale.Items.Count}");
+            }
+
             // Rebuild image dictionary
             PrimaryPhotos.Clear();
-            foreach (var item in Sale.Items)
+            if (Sale?.Items != null)
             {
-                var photoModel = await DataService.GetPrimaryPhoto(item.ItemId);
-                if (photoModel != null && photoModel.ImageData?.Length > 0)
+                foreach (var item in Sale.Items)
                 {
-                    PrimaryPhotos[item.ItemId] = $"data:image/png;base64,{Convert.ToBase64String(photoModel.ImageData)}";
-                }
-                else
-                {
-                    PrimaryPhotos[item.ItemId] = "/images/no-image.png";
+                    var photoModel = await DataService.GetPrimaryPhoto(item.ItemId);
+                    if (photoModel != null && photoModel.ImageData?.Length > 0)
+                    {
+                        PrimaryPhotos[item.ItemId] = $"data:image/png;base64,{Convert.ToBase64String(photoModel.ImageData)}";
+                    }
+                    else
+                    {
+                        PrimaryPhotos[item.ItemId] = "/images/no-image.png";
+                    }
                 }
             }
 
+            Console.WriteLine($"[DEBUG] PrimaryPhotos rebuilt: {PrimaryPhotos.Count} photos loaded.");
+
             StateHasChanged();
+            Console.WriteLine("[DEBUG] StateHasChanged called, UI should update.");
         }
         else
         {
-            Console.WriteLine("Failed to remove item from cart.");
+            Console.WriteLine("[DEBUG] Failed to remove item from cart.");
         }
     }
+
 
 }

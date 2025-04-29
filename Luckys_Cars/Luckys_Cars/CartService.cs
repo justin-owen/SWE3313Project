@@ -61,10 +61,23 @@ public class CartService
     {
         var userId = await GetCurrentUserIdAsync();
 
-        return await _dbContext.Sale
+        var sale = await _dbContext.Sale
+            .AsNoTracking()
             .Include(s => s.Items)
             .FirstOrDefaultAsync(s => s.UserId == userId && !s.Completed);
+
+        if (sale == null)
+        {
+            Console.WriteLine("[DEBUG] No active Sale found for user.");
+        }
+        else
+        {
+            Console.WriteLine($"[DEBUG] Active Sale found: SaleId={sale.SaleId}, Items count={sale.Items.Count}");
+        }
+
+        return sale;
     }
+
 
     // Marks the Sale as Complete
     public async Task CompleteSaleAsync(int saleId)
@@ -81,15 +94,37 @@ public class CartService
     // Removes an item from the cart
     public async Task<bool> RemoveItemFromCartAsync(int itemId)
     {
-        var item = await _dbContext.Cars.FirstOrDefaultAsync(c => c.ItemId == itemId && c.SaleId != null);
-        if (item != null)
+        var userId = await GetCurrentUserIdAsync();
+
+        var sale = await _dbContext.Sale
+            .Include(s => s.Items)
+            .FirstOrDefaultAsync(s => s.UserId == userId && !s.Completed);
+
+        if (sale == null)
         {
-            item.SaleId = null; // Remove from Sale
-            await _dbContext.SaveChangesAsync();
-            return true;
+            Console.WriteLine("[DEBUG] No active sale found for user.");
+            return false;
         }
-        return false;
+
+        var item = sale.Items.FirstOrDefault(i => i.ItemId == itemId);
+
+        if (item == null)
+        {
+            Console.WriteLine("[DEBUG] Item not found in current user's cart.");
+            return false;
+        }
+
+        item.SaleId = null; // Remove from current Sale
+        await _dbContext.SaveChangesAsync();
+        
+        var carCheck = await _dbContext.Cars.FirstOrDefaultAsync(c => c.ItemId == itemId);
+        if (carCheck != null)
+        {
+            Console.WriteLine($"[DEBUG] After removal, Car ItemId={carCheck.ItemId} has SaleId={carCheck.SaleId}");
+        }
+        return true;
     }
+
 
     // Gets the authenticated user's integer ID
     private async Task<int> GetCurrentUserIdAsync()

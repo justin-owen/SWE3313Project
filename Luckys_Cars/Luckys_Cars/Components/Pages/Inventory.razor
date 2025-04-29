@@ -2,10 +2,12 @@
 @using Luckys_Cars.Data
 @using Luckys_Cars.Models
 @using Microsoft.EntityFrameworkCore
+@attribute [Authorize]
 @layout MainLayout
 @rendermode InteractiveServer
 @inject NavigationManager Navigation
 @inject DataService DataService
+@inject HttpClient Http
 <div class="bg-secondary w-100 border border-top-0 bg-body" style="position: fixed; top: 5vh; height: 10vh"></div>
 <div class="h-100 bg-white ">
         <div style=";margin-bottom:10vh;margin-top:15vh;display: grid; 
