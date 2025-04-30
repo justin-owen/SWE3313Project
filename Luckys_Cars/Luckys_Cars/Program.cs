@@ -17,7 +17,7 @@ builder.Services.AddAuthentication("Identity.Application")
 builder.Services.AddAuthorization();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddHttpClient();
-
+builder.Services.AddControllers();
 
 
 
@@ -32,7 +32,6 @@ builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddScoped<Authenticator>();
 builder.Services.AddScoped<AuthenticationStateProvider>(provider => provider.GetRequiredService<Authenticator>());
 builder.Services.AddScoped<CartStateService>();
-
 
 
 
@@ -53,6 +52,11 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();
+app.UseRouting();
+
+app.MapRazorComponents<App>()
+    .AddInteractiveServerRenderMode();
 
 
 app.UseAntiforgery();
@@ -107,6 +111,10 @@ app.MapPost("/api/login", async (HttpContext context, DataService dataService) =
     }
 });
 
+app.MapRazorComponents<App>()
+    .AddInteractiveServerRenderMode();
+
+app.MapControllers();
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
 

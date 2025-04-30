@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\kklan\\RiderProjects\\SWE3313Project\\Luckys_Cars\\Luckys_Cars\\Luckys_Cars.csproj": {}
+    "C:\\Users\\kklan\\RiderProjects\\SWE3313Project\\SWE3313Project\\Luckys_Cars\\Luckys_Cars\\Luckys_Cars.csproj": {}
   },
   "projects": {
-    "C:\\Users\\kklan\\RiderProjects\\SWE3313Project\\Luckys_Cars\\Luckys_Cars\\Luckys_Cars.csproj": {
+    "C:\\Users\\kklan\\RiderProjects\\SWE3313Project\\SWE3313Project\\Luckys_Cars\\Luckys_Cars\\Luckys_Cars.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\kklan\\RiderProjects\\SWE3313Project\\Luckys_Cars\\Luckys_Cars\\Luckys_Cars.csproj",
+        "projectUniqueName": "C:\\Users\\kklan\\RiderProjects\\SWE3313Project\\SWE3313Project\\Luckys_Cars\\Luckys_Cars\\Luckys_Cars.csproj",
         "projectName": "Luckys_Cars",
-        "projectPath": "C:\\Users\\kklan\\RiderProjects\\SWE3313Project\\Luckys_Cars\\Luckys_Cars\\Luckys_Cars.csproj",
+        "projectPath": "C:\\Users\\kklan\\RiderProjects\\SWE3313Project\\SWE3313Project\\Luckys_Cars\\Luckys_Cars\\Luckys_Cars.csproj",
         "packagesPath": "C:\\Users\\kklan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\kklan\\RiderProjects\\SWE3313Project\\Luckys_Cars\\Luckys_Cars\\obj\\",
+        "outputPath": "C:\\Users\\kklan\\RiderProjects\\SWE3313Project\\SWE3313Project\\Luckys_Cars\\Luckys_Cars\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\kklan\\AppData\\Roaming\\NuGet\\NuGet.Config",

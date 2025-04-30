@@ -1,6 +1,8 @@
 ﻿@page "/SalesReport"
 @inject LuckysDbContext LuckysDbContext
 @layout MainLayout
+@inject HttpClient Http
+@inject NavigationManager Navigation
 @rendermode InteractiveServer
 <style>
     body,article,main{
@@ -29,11 +31,15 @@
                     <p class="mb-0 text-dark">User ID: @sale.UserId</p>
                     <p class="mb-0 text-dark">Total Cars Sold: @sale.Items.Count()</p>
                     <p class="mb-0 text-dark">Total Sale: @((sale.Items.Sum(i => i.Cost) / 100.0m).ToString("C"))</p>
-                    </div>
+                </div>
             }
         </div>
     }
+    
 </div>
+<button class="btn btn-primary" @onclick="ExportSalesAsync" style="margin-left: 4vh">
+    Export Sales as CSV
+</button>
 
 @code {
     private List<Sale_Model>? CompletedSales;
@@ -47,5 +53,15 @@
             .ToListAsync();
 
     }
+    private async Task ExportSalesAsync()
+    {
+        // Dynamically build the full URL from the current app's origin
+        var baseUri = Navigation.BaseUri.TrimEnd('/');
+        var exportUri = $"{baseUri}/api/sales/export";
 
+        var csvStream = await Http.GetStreamAsync(exportUri);
+        using var streamRef = new DotNetStreamReference(stream: csvStream);
+        await JS.InvokeVoidAsync("downloadFileFromStream", "SalesExport.csv", streamRef);
+    }
+    [Inject] IJSRuntime JS { get; set; }
 }
