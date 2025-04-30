@@ -69,6 +69,45 @@ This section details our system for implementation.
 
 - [Data Storage Plan](/Data_Storage_Plan.md)
 
+
+###Project Implementation
+Finally, it is time to show off our demo project for the brand new "Lucky's Cars!" Online Car Sales website. This site is intended to allow customers to browse and purchase used cars of various means. It is also there to allow staff at Lucky's Cars to add and edit their inventory, manage users, and check sales. 
+
+##Installation
+To check out the demo, you will need to install some tools. Hopefully in the future this will not be the case, and a single download will do. For now, here are the steps to run the project:
+
+#Step 1:
+- Install some form of .Net IDE.
+    - Our team recommends Jetbrains Rider, available at this [link](https://www.jetbrains.com/rider/download/)
+    - Make sure you select the correct operating system for your machine, be that MacOS or Windows.
+        - We did test that so long as there is an IDE to host, and Git framework to download, the application will run on MacOS
+#Step 2 (Option 1):
+- You can install the Git framework to easily download this application.
+  - Use this [link](https://git-scm.com/downloads) to navigate to the downloads page.
+  - Windows it is simple, just download and run the installer for Git framework
+  - For MacOs, you will need something to adapt the framework, I recommend Homebrew.
+    - To install homebrew, go to this [link](https://brew.sh) and copy and paste the listed command line into MacOS terminal application.
+    - Let that run to completion, and afterwards run the command "brew install git."
+    - Once that is done you can move onto the next step.
+#Step 2 (Option 2)
+- Click on the Code button at the top of this Github Repository, and select download compressed zip folder.
+#Step 3
+- You will need to download the .NET 9.0 framework, which is located at this [link](https://dotnet.microsoft.com/en-us/download).
+  - Alternatively, Rider will prompt you upon opening the file to download the required .NET files once you complete the next step.
+#Step 4
+- Inside the IDE, you will need to either open the apllication Luckys_cars.sln, located in this directory: 'Luckys_Cars/Luckys_Cars.sln'
+- Alternatively, if you have Git installed, most IDEs have a clone repository option, in which case you simply need to click 'Code' at the top of this repository page, and copy the link there.
+  - Then, paste the link into the IDE, which should enable you to clone the repository.
+#Step 5
+- Once the file is open in the IDE, locate the run button.
+  - For those who are using rider, that is the green play button located at the top of the IDE.
+##And Thats It!
+The app is yours to explore
+
+For those looking to explore our Admin options, please login with the username: Developer_Admin and password: sillyhill795
+
+For Jeff Adkisson, we have already setup an admin account for you under username: JAdkiss1 and password: SecretPassword3313
+
 ### Project Presentations
 
 - Click [here](/Presentations/Presentation_Links.md) for a list of recorded presentations of the project deliverables
