@@ -1,0 +1,56 @@
+﻿@page "/UserList"
+@layout MainLayout
+@inject DataService DataService
+
+<div style="min-height: 5vh"></div>
+
+
+<h2 class="text-white px-5 pt-4" style="font-family: Norwester, Arial, sans-serif;">USERS</h2>
+
+<div class="container-fluid px-5">
+    <table class="table text-white table-borderless">
+        <tbody>
+        @foreach (var user in Users)
+        {
+            <tr class="border-bottom">
+                <td class="py-3" style="font-size: 15pt; color: white">@user.Name</td>
+                <td class="py-3 text-end">
+                    <div class="dropdown">
+                        <button class="btn text-white" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span style="font-size: 1.5rem; color: white">...</span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            @if (user.IsAdmin == 0)
+                            {
+                                <li><button class="dropdown-item" @onclick="() => PromoteToAdmin(user.UserId)">Set as Admin</button></li>
+                            }
+                            <li><button class="dropdown-item text-danger" @onclick="() => DeleteUser(user.UserId)">Delete User</button></li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+
+@code {
+    private List<User_Model> Users = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Users = await DataService.GetUsers();
+    }
+
+    private async Task PromoteToAdmin(int userId)
+    {
+        await DataService.SetUserAdminStatus(userId, true);
+        Users = await DataService.GetUsers(); // Refresh list
+    }
+
+    private async Task DeleteUser(int userId)
+    {
+        await DataService.DeleteUser(userId);
+        Users = await DataService.GetUsers(); // Refresh list
+    }
+}

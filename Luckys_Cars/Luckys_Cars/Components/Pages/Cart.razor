@@ -21,7 +21,6 @@
     }
 </style>
 <div style="height: 10vh;"></div>
-<h1 class="text-center" style="color: #425163FF; font-family: Norwester, Arial, sans-serif">Summary</h1>
 @if (IsLoading)
 {
     <div class="text-center mt-5">
@@ -35,8 +34,9 @@ else if (Sale == null || !Sale.Items.Any())
         <button class="btn btn-primary mt-3" @onclick="GoToInventory">Browse Cars</button>
     </div>
 }
-else
+else if (!showCheckout)
 {
+    <h1 class="text-center" style="color: #425163FF; font-family: Norwester, Arial, sans-serif; padding-top: 10vh">Summary</h1>
     <div class="container-fluid py-5 d-flex justify-content-center">
     <div class="bg-primary border rounded p-4" style="max-width: 1200px; width: 100%;">
     <div class="row g-5 m-0 justify-content-center align-items-center">
@@ -58,7 +58,7 @@ else
                                  alt="Car Image" />
                             <div class="mt-2 bg-grey border rounded text-center text-white">
                                 <strong>@car.Year @car.Make @car.Model</strong><br />
-                                <span>@((car.Cost / 100.0m).ToString("C0"))</span>
+                                <span>@((car.Cost / 100.0m).ToString("C"))</span>
                             </div>
                         </div>
                     }
@@ -87,18 +87,21 @@ else
 
                                 <div class="d-flex flex-column align-items-end">
                                     <div class="fw-bold text-light">
-                                        @((item.Cost / 100.0m).ToString("C0"))
+                                        @((item.Cost / 100.0m).ToString("C"))
                                     </div>
                                     <button class="btn btn-sm btn-outline-danger mt-1" @onclick="()=>RemoveFromCart(item.ItemId)">Remove</button>
                                 </div>
                             </div>
                         }
                     </div>
-                    <p>Subtotal: @((Sale.Items.Sum(i => i.Cost) / 100).ToString("N0"))</p>
-                    <p>Delivery & Fees: 2000</p>
-                    <p>Tax: 234.32</p>
-                    <p class="total mt-3">TOTAL: @(((Sale.Items.Sum(i => i.Cost) + 2000 + 23432) / 100.0m).ToString("N2"))</p>
-                    <button class="btn w-100 mt-3" style="background-color: darkgreen" @onclick="Checkout">Checkout</button>
+                    <p>Subtotal:@((Sale.Items.Sum(i => i.Cost) / 100.0m).ToString("C"))</p>
+                    <p>Delivery & Fees: @DeliverCalc().ToString("C")</p>
+                    <p>Tax: @TaxCalc().ToString("C")</p>
+                    <p class="total mt-3">TOTAL: @(((Sale.Items.Sum(i => i.Cost)) / 100.0m + TaxCalc() + DeliverCalc()).ToString("C"))</p>
+                    <button class="btn w-100 mt-3" style="background-color: darkgreen" @onclick="() => showCheckout = true">
+                        Checkout
+                    </button>
+
                 </div>
             </div>
         </div>
@@ -108,23 +111,111 @@ else
     </div>
 }
 
+<!-- Checkout Window -->
+@if (showCheckout) {
+    <div class="container my-5 p-4 bg-primary border rounded">
+        <h3 class="text-center text-uppercase text-white mb-4" style="font-family: Norwester, Arial, sans-serif;">Checkout</h3>
+        <div class="row">
+            <!-- Summary Column -->
+            <div class="col-md-6 p-4" style="background-color: #0b1c2c; border-radius: 8px; color: #f2b134;">
+                <h5 class="text-uppercase mb-3" style="color: #999;">Summary</h5>
+                <p><strong>Subtotal:</strong> @((Sale.Items.Sum(i => i.Cost) / 100).ToString("N0"))</p>
+                <p><strong>Delivery & Fees:</strong> 2000</p>
+                <p><strong>Tax:</strong> 234.32</p>
+                <p class="mt-4" style="font-weight: bold; font-size: 1.5rem;">TOTAL: 
+                    @(((Sale.Items.Sum(i => i.Cost) + 2000 + 23432) / 100.0m).ToString("N2"))
+                </p>
+            </div>
+
+            <!-- Form Column -->
+            <div class="col-md-6 p-4" style="color: white">
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Card Number:</label>
+                    <input class="form-control" style="color: black" placeholder="Card Number" @bind="CardNumber" />
+                    @if (!string.IsNullOrEmpty(CardNumberError))
+                    {
+                        <div class="mt-1" style="color: red">@CardNumberError</div>
+                    }
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold">CVV:</label>
+                    <input class="form-control" style="color: black" placeholder="CVV" @bind="CVV" />
+                    @if (!string.IsNullOrEmpty(CVVError))
+                    {
+                        <div class="mt-1" style="color: red">@CVVError</div>
+                    }
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Expiration Date:</label>
+                    <input class="form-control" style="color: black" placeholder="m/dd/yyyy" @bind="ExpirationDate" />
+                    @if (!string.IsNullOrEmpty(ExpirationError))
+                    {
+                        <div class="mt-1" style="color: red">@ExpirationError</div>
+                    }
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Address:</label>
+                    <input class="form-control" style="color: black" placeholder="Address" @bind="Address"  />
+                    @if (!string.IsNullOrEmpty(AddressError))
+                    {
+                        <div class="mt-1" style="color: red">@AddressError</div>
+                    }
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold">ZIP Code:</label>
+                    <input class="form-control" style="color: black" placeholder="ZIP Code" @bind="ZipCode" />
+                    @if (!string.IsNullOrEmpty(ZipError))
+                    {
+                        <div class="mt-1" style="color: red">@ZipError</div>
+                    }
+                </div>
+
+
+                <div class="text-center my-3">
+                    <img src="/images/Raster.png" alt="Panther Logo" style="width: 80px;" />
+                </div>
+
+                <button class="btn w-100 fw-bold" style="background-color: darkgreen" @onclick="Checkout">
+                    Checkout
+                </button>
+            </div>
+        </div>
+    </div>
+}
+
 @code {
-    private Sale_Model? Sale;
+    private Cart_Model? Sale;
     private Dictionary<int, string> PrimaryPhotos = new();
     private bool IsLoading = true;
+    private int CurrentCarouselIndex = 0;
+    private bool showCheckout = false;
+    
+    private string CardNumber = "";
+    private string CVV = "";
+    private string ExpirationDate = "";
+    private string Address = "";
+    private string ZipCode = "";
+    
+    private string CardNumberError = "";
+    private string CVVError = "";
+    private string ExpirationError = "";
+    private string AddressError = "";
+    private string ZipError = "";
+
+
 
     protected override async Task OnInitializedAsync()
     {
         IsLoading = true;
-        Sale = await CartService.GetCurrentSaleAsync();
+        Sale = await CartService.GetCurrentCartAsync();
 
         if (Sale == null)
         {
-            Console.WriteLine("DEBUG: Sale is null!");
+            Console.WriteLine("DEBUG: Cart is null!");
         }
         else
         {
-            Console.WriteLine($"DEBUG: Sale ID = {Sale.SaleId}, Item count = {Sale.Items.Count}");
+            Console.WriteLine($"DEBUG: Cart ID = {Sale.CartId}, Item count = {Sale.Items.Count}");
         }
 
         if (Sale != null && Sale.Items.Any())
@@ -146,20 +237,65 @@ else
         IsLoading = false;
     }
 
-
     private async Task Checkout()
     {
-        if (Sale != null)
-        {
-            await CartService.CompleteSaleAsync(Sale.SaleId);
-            Navigation.NavigateTo("/Inventory");
-        }
+            CardNumberError = CVVError = ExpirationError = AddressError = ZipError = "";
+
+            bool isValid = true;
+
+            if (string.IsNullOrWhiteSpace(CardNumber) || CardNumber.Length < 16)
+            {
+                CardNumberError = "Please enter a valid card number.";
+                isValid = false;
+            }
+
+            if (string.IsNullOrWhiteSpace(CVV) || CVV.Length < 3)
+            {
+                CVVError = "Please enter a valid CVV.";
+                isValid = false;
+            }
+
+            if (string.IsNullOrWhiteSpace(ExpirationDate))
+            {
+                ExpirationError = "Please enter expiration date.";
+                isValid = false;
+            }
+
+            if (string.IsNullOrWhiteSpace(Address))
+            {
+                AddressError = "Please enter a billing address.";
+                isValid = false;
+            }
+
+            if (string.IsNullOrWhiteSpace(ZipCode) || ZipCode.Length < 5)
+            {
+                ZipError = "Please enter a valid ZIP code.";
+                isValid = false;
+            }
+
+            if (!isValid)
+            {
+                Console.WriteLine("[DEBUG] Checkout failed validation.");
+                return;
+            }
+
+            Console.WriteLine("[DEBUG] Proceeding to CompleteSaleAsync...");
+    
+            var cart = await CartService.GetCurrentCartAsync(); // Adjust this if needed
+            if (cart != null)
+            {
+                await CartService.CompleteSaleAsync(cart.CartId);
+                CartStateService.SetCartStatus(false);
+                Navigation.NavigateTo("/Inventory");
+            }
+
     }
 
     private void GoToInventory()
     {
         Navigation.NavigateTo("/Inventory");
     }
+
     private async Task RemoveFromCart(int itemId)
     {
         Console.WriteLine($"[DEBUG] RemoveFromCart called for ItemId={itemId}");
@@ -169,42 +305,37 @@ else
 
         if (result)
         {
-            // Reload updated sale
-            Sale = await CartService.GetCurrentSaleAsync();
+            // Reload updated cart
+            Sale = await CartService.GetCurrentCartAsync();
 
             if (Sale == null || !Sale.Items.Any())
             {
-                Console.WriteLine("[DEBUG] Reloaded Sale is null after removal.");
+                Console.WriteLine("[DEBUG] Reloaded Cart is null after removal.");
                 CartStateService.SetCartStatus(false);
-                
                 Navigation.NavigateTo("/Inventory");
                 return;
             }
             else
             {
-                Console.WriteLine($"[DEBUG] Reloaded SaleId={Sale.SaleId}, Items.Count={Sale.Items.Count}");
+                Console.WriteLine($"[DEBUG] Reloaded CartId={Sale.CartId}, Items.Count={Sale.Items.Count}");
             }
 
             // Rebuild image dictionary
             PrimaryPhotos.Clear();
-            if (Sale?.Items != null)
+            foreach (var item in Sale.Items)
             {
-                foreach (var item in Sale.Items)
+                var photoModel = await DataService.GetPrimaryPhoto(item.ItemId);
+                if (photoModel != null && photoModel.ImageData?.Length > 0)
                 {
-                    var photoModel = await DataService.GetPrimaryPhoto(item.ItemId);
-                    if (photoModel != null && photoModel.ImageData?.Length > 0)
-                    {
-                        PrimaryPhotos[item.ItemId] = $"data:image/png;base64,{Convert.ToBase64String(photoModel.ImageData)}";
-                    }
-                    else
-                    {
-                        PrimaryPhotos[item.ItemId] = "/images/no-image.png";
-                    }
+                    PrimaryPhotos[item.ItemId] = $"data:image/png;base64,{Convert.ToBase64String(photoModel.ImageData)}";
+                }
+                else
+                {
+                    PrimaryPhotos[item.ItemId] = "/images/no-image.png";
                 }
             }
 
             Console.WriteLine($"[DEBUG] PrimaryPhotos rebuilt: {PrimaryPhotos.Count} photos loaded.");
-
             StateHasChanged();
             Console.WriteLine("[DEBUG] StateHasChanged called, UI should update.");
         }
@@ -212,9 +343,7 @@ else
         {
             Console.WriteLine("[DEBUG] Failed to remove item from cart.");
         }
-        
     }
-    private int CurrentCarouselIndex = 0;
 
     private void PreviousSlide()
     {
@@ -232,5 +361,23 @@ else
         }
     }
 
+    private decimal DeliverCalc()
+    {
+        decimal deliver = 0;
+        if (Sale.Items.Count == 2)
+        {
+            deliver = 19.00m;
+        }
+        else if (Sale.Items.Count > 2)
+        {
+            deliver = 29.0m;
+        }
 
+        return deliver;
+    }
+    private decimal TaxCalc()
+    {
+        decimal tax = System.Math.Round(((Sale.Items.Sum(i => i.Cost) / 100.0m) * 0.07m),2);
+        return tax;
+    }
 }

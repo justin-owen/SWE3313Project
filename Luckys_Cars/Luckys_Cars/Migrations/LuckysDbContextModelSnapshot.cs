@@ -16,6 +16,21 @@ namespace Luckys_Cars.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.4");
 
+            modelBuilder.Entity("Cars_ModelCart_Model", b =>
+                {
+                    b.Property<int>("Cart_ModelCartId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ItemsItemId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Cart_ModelCartId", "ItemsItemId");
+
+                    b.HasIndex("ItemsItemId");
+
+                    b.ToTable("Cars_ModelCart_Model");
+                });
+
             modelBuilder.Entity("Luckys_Cars.Models.CarPhotos_Model", b =>
                 {
                     b.Property<int>("ImageId")
@@ -75,9 +90,6 @@ namespace Luckys_Cars.Migrations
                     b.Property<int?>("SaleId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("Sale_ModelSaleId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Transmission")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -88,8 +100,6 @@ namespace Luckys_Cars.Migrations
                     b.HasKey("ItemId");
 
                     b.HasIndex("SaleId");
-
-                    b.HasIndex("Sale_ModelSaleId");
 
                     b.ToTable("Cars");
 
@@ -150,6 +160,22 @@ namespace Luckys_Cars.Migrations
                             Transmission = "Automatic 7 Speed",
                             Year = 2013
                         });
+                });
+
+            modelBuilder.Entity("Luckys_Cars.Models.Cart_Model", b =>
+                {
+                    b.Property<int>("CartId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("CartId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Carts");
                 });
 
             modelBuilder.Entity("Luckys_Cars.Models.Sale_Model", b =>
@@ -230,6 +256,21 @@ namespace Luckys_Cars.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Cars_ModelCart_Model", b =>
+                {
+                    b.HasOne("Luckys_Cars.Models.Cart_Model", null)
+                        .WithMany()
+                        .HasForeignKey("Cart_ModelCartId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Luckys_Cars.Models.Cars_Model", null)
+                        .WithMany()
+                        .HasForeignKey("ItemsItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Luckys_Cars.Models.CarPhotos_Model", b =>
                 {
                     b.HasOne("Luckys_Cars.Models.Cars_Model", "Car")
@@ -244,14 +285,22 @@ namespace Luckys_Cars.Migrations
             modelBuilder.Entity("Luckys_Cars.Models.Cars_Model", b =>
                 {
                     b.HasOne("Luckys_Cars.Models.Sale_Model", "Sale")
-                        .WithMany()
-                        .HasForeignKey("SaleId");
-
-                    b.HasOne("Luckys_Cars.Models.Sale_Model", null)
                         .WithMany("Items")
-                        .HasForeignKey("Sale_ModelSaleId");
+                        .HasForeignKey("SaleId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Sale");
+                });
+
+            modelBuilder.Entity("Luckys_Cars.Models.Cart_Model", b =>
+                {
+                    b.HasOne("Luckys_Cars.Models.User_Model", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Luckys_Cars.Models.Sale_Model", b =>

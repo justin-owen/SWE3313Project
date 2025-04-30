@@ -3,6 +3,7 @@ using Luckys_Cars.Models;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
+using Luckys_Cars.Components.Pages;
 
 public class CartService
 {
@@ -20,73 +21,59 @@ public class CartService
     {
         var userId = await GetCurrentUserIdAsync();
 
-        // Get or create the user's open Sale
-        var sale = await _dbContext.Sale
-            .Include(s => s.Items)
-            .FirstOrDefaultAsync(s => s.UserId == userId && !s.Completed);
+        var cart = await _dbContext.Carts
+            .Include(c => c.Items)
+            .FirstOrDefaultAsync(c => c.UserId == userId);
 
-        if (sale == null)
+        if (cart == null)
         {
-            sale = new Sale_Model
+            cart = new Cart_Model
             {
                 UserId = userId,
-                Completed = false,
                 Items = new List<Cars_Model>()
             };
-            _dbContext.Sale.Add(sale);
-            await _dbContext.SaveChangesAsync(); // Save to generate SaleId
+            _dbContext.Carts.Add(cart);
+            await _dbContext.SaveChangesAsync();
         }
 
         var car = await _dbContext.Cars.FirstOrDefaultAsync(c => c.ItemId == itemId);
-
         if (car == null)
         {
             Console.WriteLine($"[DEBUG] No car found with ItemId {itemId}");
             return false;
         }
 
-        // Only add if not already part of a Sale
-        car.SaleId = sale.SaleId;
-        await _dbContext.SaveChangesAsync();
-        Console.WriteLine($"[DEBUG] Added ItemId {itemId} to SaleId {sale.SaleId}");
-
+        // Avoid duplicate entries
+        if (!cart.Items.Any(c => c.ItemId == itemId))
+        {
+            cart.Items.Add(car);
+            await _dbContext.SaveChangesAsync();
+            Console.WriteLine($"[DEBUG] Added ItemId {itemId} to CartId {cart.CartId}");
+        }
 
         return true;
     }
 
-    // Loads the current Sale (Cart) for the user
-    public async Task<Sale_Model?> GetCurrentSaleAsync()
+    // Loads the current cart for the user
+    public async Task<Cart_Model?> GetCurrentCartAsync()
     {
         var userId = await GetCurrentUserIdAsync();
 
-        var sale = await _dbContext.Sale
+        var cart = await _dbContext.Carts
             .AsNoTracking()
-            .Include(s => s.Items)
-            .FirstOrDefaultAsync(s => s.UserId == userId && !s.Completed);
+            .Include(c => c.Items)
+            .FirstOrDefaultAsync(c => c.UserId == userId);
 
-        if (sale == null)
+        if (cart == null)
         {
-            Console.WriteLine("[DEBUG] No active Sale found for user.");
+            Console.WriteLine("[DEBUG] No active cart found for user.");
         }
         else
         {
-            Console.WriteLine($"[DEBUG] Active Sale found: SaleId={sale.SaleId}, Items count={sale.Items.Count}");
+            Console.WriteLine($"[DEBUG] Active cart found: CartId={cart.CartId}, Items count={cart.Items.Count}");
         }
 
-        return sale;
-    }
-
-
-    // Marks the Sale as Complete
-    public async Task CompleteSaleAsync(int saleId)
-    {
-        var sale = await _dbContext.Sale.FindAsync(saleId);
-
-        if (sale != null)
-        {
-            sale.Completed = true;
-            await _dbContext.SaveChangesAsync();
-        }
+        return cart;
     }
 
     // Removes an item from the cart
@@ -94,17 +81,17 @@ public class CartService
     {
         var userId = await GetCurrentUserIdAsync();
 
-        var sale = await _dbContext.Sale
-            .Include(s => s.Items)
-            .FirstOrDefaultAsync(s => s.UserId == userId && !s.Completed);
+        var cart = await _dbContext.Carts
+            .Include(c => c.Items)
+            .FirstOrDefaultAsync(c => c.UserId == userId);
 
-        if (sale == null)
+        if (cart == null)
         {
-            Console.WriteLine("[DEBUG] No active sale found for user.");
+            Console.WriteLine("[DEBUG] No active cart found for user.");
             return false;
         }
 
-        var item = sale.Items.FirstOrDefault(i => i.ItemId == itemId);
+        var item = cart.Items.FirstOrDefault(i => i.ItemId == itemId);
 
         if (item == null)
         {
@@ -112,19 +99,83 @@ public class CartService
             return false;
         }
 
-        item.SaleId = null; // Remove from current Sale
+        cart.Items.Remove(item);
         await _dbContext.SaveChangesAsync();
-        
-        var carCheck = await _dbContext.Cars.FirstOrDefaultAsync(c => c.ItemId == itemId);
-        if (carCheck != null)
-        {
-            Console.WriteLine($"[DEBUG] After removal, Car ItemId={carCheck.ItemId} has SaleId={carCheck.SaleId}");
-        }
+        Console.WriteLine($"[DEBUG] Removed ItemId={itemId} from CartId={cart.CartId}");
         return true;
+    }
+    
+    public async Task CompleteSaleAsync(int cartId)
+    {
+        var cart = await _dbContext.Carts
+            .Include(c => c.Items)
+            .FirstOrDefaultAsync(c => c.CartId == cartId);
+
+        if (cart == null || cart.Items.Count == 0)
+        {
+            Console.WriteLine("[DEBUG] Cart not found or empty.");
+            return;
+        }
+
+        int subtotal = 0;
+        foreach (var car in cart.Items)
+        {
+            subtotal += car.Cost;
+        }
+        
+        decimal taxRate = 0.07m;
+        int tax = (int)Math.Round(subtotal * taxRate);
+        
+        int shipping = 0;
+        if (cart.Items.Count == 1)
+        {
+            shipping = 0;
+        }
+        else if (cart.Items.Count == 2)
+        {
+            shipping = 1900;
+        }
+        else
+        {
+            shipping = 2900;
+        }
+
+        //Create Sale
+        var sale = new Sale_Model
+        {
+            UserId = cart.UserId,
+            Completed = true,
+            InvPrice = subtotal,
+            Tax = tax,
+            Shipping = shipping,
+            Items = new List<Cars_Model>()
+        };
+
+        _dbContext.Sale.Add(sale);
+        await _dbContext.SaveChangesAsync();
+
+        Console.WriteLine($"[DEBUG] New Sale created: SaleId={sale.SaleId}, Subtotal={subtotal}, Tax={tax}, Shipping={shipping}");
+
+        //Link Cars to Sale
+        foreach (var car in cart.Items)
+        {
+            car.SaleId = sale.SaleId;
+            sale.Items.Add(car);
+        }
+
+        await _dbContext.SaveChangesAsync();
+        Console.WriteLine($"[DEBUG] Cars updated with new SaleId={sale.SaleId}");
+
+        //Remove Cart
+        _dbContext.Carts.Remove(cart);
+        await _dbContext.SaveChangesAsync();
+        Console.WriteLine($"[DEBUG] CartId={cartId} removed after checkout.");
     }
 
 
-    // Gets the authenticated user's integer ID
+
+
+    // Gets the authenticated user's ID
     private async Task<int> GetCurrentUserIdAsync()
     {
         var authState = await _authProvider.GetAuthenticationStateAsync();

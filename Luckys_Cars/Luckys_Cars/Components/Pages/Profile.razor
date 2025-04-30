@@ -1,0 +1,55 @@
+﻿@page "/Profile"
+@rendermode InteractiveServer
+@layout MainLayout
+@inject Authenticator Authenticator
+@inject DataService DataService
+
+
+
+<div class="d-flex justify-content-center align-items-center min-vh-100 min-vw-100">
+    <div class="d-flex bg-white align-items-center justify-content-center" style="width: 800px; height: 600px">
+        <div class="row gap-2 justify-content-between align-items-center w-100" style="color: black">
+            <div class="col text-center" style="color: black; height: auto">
+                <img style="height: 300px; align-self: center" src="images/Profile-Icon.png"/>
+            </div>
+            <div class="col" style="height: auto">
+                <h3 class="profHeader3"><strong>Name: </strong>@Name</h3>
+                <h3 class="profHeader3"><strong>Username: </strong>@Username</h3>
+                <h4 class="profHeader3"><strong>Email: </strong>@Email</h4>
+                <h5 class="profHeader3"><strong>Password: </strong>@PasswordStars</h5>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private string Name = "";
+    private string Username = "";
+    private string Email = "";
+    private string PasswordStars = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await Authenticator.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        if (user.Identity?.IsAuthenticated ?? false)
+        {
+            string userId = user.FindFirst(c => c.Type.Contains("nameidentifier"))?.Value ?? "";
+
+            if (!string.IsNullOrEmpty(userId))
+            {
+                var userModel = await DataService.GetUserById(int.Parse(userId));
+                if (userModel != null)
+                {
+                    Name = userModel.Name;
+                    Username = userModel.Username;
+                    Email = userModel.Email;
+
+                    int passwordLength = userModel.Password?.Length ?? 0;
+                    PasswordStars = new string('*', passwordLength);
+                }
+            }
+        }
+    }
+}

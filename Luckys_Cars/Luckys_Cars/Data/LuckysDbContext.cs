@@ -13,7 +13,8 @@ namespace Luckys_Cars.Data
         public DbSet<User_Model> Users { get; set; }
         public DbSet<Sale_Model> Sale { get; set; }
         public DbSet<CarPhotos_Model> CarPhotos { get; set; }
-
+        public DbSet<Cart_Model> Carts { get; set; }
+        
         public LuckysDbContext(DbContextOptions<LuckysDbContext> options) : base(options)
         {
             
@@ -127,6 +128,10 @@ namespace Luckys_Cars.Data
                 .HasOne(cp => cp.Car)
                 .WithMany()
                 .HasForeignKey(cp => cp.ItemId);
+            modelBuilder.Entity<Cart_Model>()
+                .HasMany(c => c.Items)
+                .WithMany(); 
+
             
             base.OnModelCreating(modelBuilder);
         }

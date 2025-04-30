@@ -1,7 +1,8 @@
 ﻿@inject CartService CartService
 @inject CartStateService CartStateService
 @inject NavigationManager Navigation
-@inject Authenticator AuthProvider
+@inject Authenticator Authenticator
+@inject DataService DataService
 @rendermode InteractiveServer
 
 <nav class="navbar navbar-expand-lg fixed-top bg-grey border" height="">
@@ -12,12 +13,15 @@
             <h1 style="font-family: Norwester, Arial, sans-serif">Lucky's Cars</h1>
         </div>
         <div class="d-flex gap-3 h-100 me-2">
-            <NavLink href="/SalesReport">
-                <img src="/images/Report-Icon.png" style="max-height: 90%;height: auto" alt="Sales-Report-Icon"/>
-            </NavLink>
-            <NavLink>
-                <img src="/images/User-List-Icon.png" style="max-height: 90%; height:  auto" alt="User-List-Icon"/>
-            </NavLink>
+            @if (IsAdmin)
+            {
+                <NavLink href="/SalesReport">
+                    <img src="/images/Report-Icon.png" style="max-height: 90%;height: auto" alt="Sales-Report-Icon"/>
+                </NavLink>
+                <NavLink href="/UserList">
+                    <img src="/images/User-List-Icon.png" style="max-height: 90%; height:  auto" alt="User-List-Icon"/>
+                </NavLink>
+            }
             <NavLink href="/Inventory">
                 <img src="/images/Home-Icon.png" style="max-height: 90%; height: auto" alt="Home-Icon"/>
             </NavLink>
@@ -26,15 +30,15 @@
             @if (HasCart)
             {
                 <NavLink href="/Cart">
-                    <img src="/images/Cart-Icon.png" style="max-height: 90%; height: auto;" alt="Cart-Icon" />
+                    <img src="/images/Cart-Icon.png" style="max-height: 90%; height: auto;" alt="Cart-Icon"/>
                 </NavLink>
             }
             else
             {
-                <img src="/images/Cart-Icon.png" style="max-height: 90%; height: auto; opacity: 0.5;" alt="Cart-Icon" />
+                <img src="/images/Cart-Icon.png" style="max-height: 90%; height: auto; opacity: 0.5;" alt="Cart-Icon"/>
             }
 
-            <NavLink>
+            <NavLink href="/Profile">
                 <img src="/images/Profile-Icon.png" style="max-height: 90%; height: auto" alt="Profile-Icon"/>
             </NavLink>
 
@@ -43,8 +47,10 @@
     </div>
 
 </nav>
-@code{private bool HasCart = false;
+@code {
+    private bool HasCart = false;
     private bool isSubscribed = false;
+    private bool IsAdmin = false; 
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -55,17 +61,26 @@
 
             Console.WriteLine("[DEBUG] NavMenu subscribed to CartStateService.OnChange");
 
-            // 🔥 NEW: Check if cart already exists on startup
-            var authState = await AuthProvider.GetAuthenticationStateAsync();
+
+            var authState = await Authenticator.GetAuthenticationStateAsync();
             var user = authState.User;
 
             if (user.Identity != null && user.Identity.IsAuthenticated)
             {
-                var sale = await CartService.GetCurrentSaleAsync();
-                if (sale != null && sale.Items.Any())
+                var cart = await CartService.GetCurrentCartAsync();
+                if (cart != null && cart.Items.Any())
                 {
                     Console.WriteLine("[DEBUG] NavMenu found existing cart on startup.");
                     CartStateService.SetCartStatus(true);
+                }
+                
+                var userId = await Authenticator.GetCurrentUserIdAsync();
+                if (userId.HasValue)
+                {
+                    var dbUser = await DataService.GetUserById(userId.Value);
+                    IsAdmin = dbUser?.IsAdmin == 1;
+
+                    Console.WriteLine($"[DEBUG] User IsAdmin = {IsAdmin}");
                 }
             }
 
@@ -95,17 +110,4 @@
             Console.WriteLine("[DEBUG] NavMenu unsubscribed from CartStateService.OnChange");
         }
     }
-
-    private void NavigateToCart()
-    {
-        if (HasCart)
-        {
-            Navigation.NavigateTo("/Cart");
-        }
-        else
-        {
-            Console.WriteLine("[DEBUG] Attempted to navigate without cart.");
-        }
-    }
-
 }

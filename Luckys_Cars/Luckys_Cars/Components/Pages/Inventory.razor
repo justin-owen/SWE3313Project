@@ -8,59 +8,471 @@
 @inject NavigationManager Navigation
 @inject DataService DataService
 @inject HttpClient Http
-<div class="bg-secondary w-100 border border-top-0 bg-body" style="position: fixed; top: 5vh; height: 10vh"></div>
+@inject Authenticator Authenticator
+@inject IJSRuntime JsRuntime
+
+
+
+
+<div class="d-flex align-items-center justify-content-center gap-3 px-5 py-3 bg-dark" style="margin-top: 5vh">
+    
+    
+    <div class="input-group" style="width: 50%;">
+        <input type="text" class="form-control" placeholder="Search by name or description" style="color: black" @bind="SearchText" />
+        <button class="btn btn-secondary" type="button" style="height: 4vh" @onclick="OnSearch">
+            <img alt="search icon" src="images/Search-Icon.png" class="d-flex" style="filter: invert(100%); 
+            object-fit: contain; max-width: 100%;max-height: 100%;width: auto;height: auto;display: block"/>
+        </button>
+    </div>
+    
+    <div class="dropdown">
+        <button class="btn btn-outline-secondary dropdown-toggle bg-grey" style="color: white" type="button" data-bs-toggle="dropdown">
+            Filter <i class="bi bi-filter"></i>
+        </button>
+        <div class="dropdown-menu p-3" style="min-width: 300px;">
+            <label class="form-label">Make</label>
+            <select class="form-select mb-2" @bind="SelectedMake" @bind:event="onchange">
+                <option value="">All Makes</option>
+                @foreach (var make in Makes)
+                {
+                    <option value="@make" class="border">@make</option>
+                }
+            </select>
+
+            <label class="form-label">Model</label>
+            <select class="form-select mb-2" @bind="SelectedModel" @bind:event="onchange">
+                <option value="">All Models</option>
+                @foreach (var model in Models)
+                {
+                    <option value="@model">@model</option>
+                }
+            </select>
+
+            <label class="form-label">Year</label>
+            <select class="form-select" @bind="SelectedYear" @bind:event="onchange">
+                <option value="">All Years</option>
+                @foreach (var year in Years)
+                {
+                    <option value="@year">@year</option>
+                }
+            </select>
+        </div>
+    </div>
+    
+    <div class="dropdown">
+        <button class="btn btn-outline-secondary dropdown-toggle bg-grey" style="color: white" type="button" data-bs-toggle="dropdown">
+            Sort By
+        </button>
+        <ul class="dropdown-menu">
+            <li><button class="dropdown-item" @onclick="SortByPriceAsync">Price</button></li>
+            <li><button class="dropdown-item" @onclick="SortByMileageAsync">Mileage</button></li>
+            <li><button class="dropdown-item text-danger" @onclick="ClearSortAsync">Clear Sort</button></li>
+        </ul>
+    </div>
+    
+</div>
 <div class="h-100 bg-white ">
-        <div style=";margin-bottom:10vh;margin-top:15vh;display: grid; 
+    <div style=";margin-bottom:10vh;display: grid; 
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem; 
         padding-inline: 12vh; padding-block: 5vh">
-            @if (Cars?.Any() == true)
+        @if (Cars?.Any() == true)
+        {
+            @foreach (var car in Cars)
             {
-                @foreach (var car in Cars)
-                {
-                    <button class="grow-on-hover bg-primary rounded border w-100 d-flex 
+                <button class="grow-on-hover bg-primary rounded border w-100 d-flex 
                             flex-column justify-content-center gap-2" 
-                            style=" padding: 12px; height: 400px; color:white" 
-                            @onclick="() => NavigateToCarDetail(car.ItemId)">
-                        @{
-                            PrimaryPhotos.TryGetValue(car.ItemId, out var photo);
-                            var imageSrc = photo != null
-                                ? $"data:image/png;base64,{Convert.ToBase64String(photo.ImageData)}"
-                                : "/images/no-image.png"; // If somehow null, fallback to static placeholder
-                        }
+                        style=" padding: 12px; height: 400px; color:white" 
+                        @onclick="() => NavigateToCarDetail(car.ItemId)">
+                    @{
+                        PrimaryPhotos.TryGetValue(car.ItemId, out var photo);
+                        var imageSrc = photo != null
+                            ? $"data:image/png;base64,{Convert.ToBase64String(photo.ImageData)}"
+                            : "/images/no-image.png"; // If somehow null, fallback to static placeholder
+                    }
 
-                        <img src="@imageSrc"
-                             alt="Car Photo"
-                             class="border"
-                             style="width: 100%; height: 180px; object-fit: cover; border-radius: 8px;"
-                             onerror="this.onerror=null;this.src='/images/no-image.png';" />
-                        <div class="border bg-grey rounded " style=" padding: 12px; height: 180px">
-                            <h5>@car.Make @car.Model</h5>
-                            <p>Price: @((car.Cost / 100.0m).ToString("C"))</p>
-                            <p>@car.Features</p>
+                    <img src="@imageSrc"
+                         alt="Car Photo"
+                         class="border"
+                         style="width: 100%; height: 180px; object-fit: cover; border-radius: 8px;"
+                         onerror="this.onerror=null;this.src='/images/no-image.png';" />
+                        
+                    @if (IsAdmin && car.SaleId != null)
+                    {
+                        <div class="position-absolute top-0 start-0 bg-secondary bg-opacity-75 text-white fw-bold p-2 rounded-end">
+                            SOLD
                         </div>
-                    </button>    
-                }
+                    }
+                    <div class="border bg-grey rounded text-start" style=" padding: 12px; height: 180px">
+                        <h5>@car.Make @car.Model</h5>
+                        <p>Price: @((car.Cost / 100.0m).ToString("C"))</p>
+                        <p>@car.Features</p>
+                    </div>
+                        
+                </button>    
             }
-        </div>
+        }
+    </div>
 </div>
+@if (IsAdmin)
+{
+    <button class="btn btn-primary"
+            style="position: fixed; bottom: 20px; right: 20px; z-index: 1000; border-radius: 50%; width: 8vh;height:8vh"
+            @onclick="TogglePopup">
+        +
+    </button>
+}
+@if (ShowPopup)
+{
+    <div class="popup-overlay" @onclick="TogglePopup">
+        <div class="popup-content" @onclick:stopPropagation>
+            <div class="d-flex flex-column align-items-center p-4 bg-white rounded shadow" style="gap: 1rem;">
+                <!-- Main Photo InputFile -->
+                <InputFile id="mainImageUploader"
+                           style="display:none;"
+                           OnChange="HandleMainImageUpload"
+                           accept="image/*" />
+
+                <!-- Button that triggers it -->
+                <button class="btn btn-light d-flex align-items-center justify-content-center"
+                        style="width: 120px; height: 120px; padding: 0;"
+                        @onclick="@(() => JsRuntime.InvokeVoidAsync("triggerFileUpload", "mainImageUploader"))">
+                    @if (MainPhoto != null)
+                    {
+                        <img src="data:image/png;base64,@Convert.ToBase64String(MainPhoto.ImageData)"
+                             style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;" alt="Main Photo" />
+                    }
+                    else
+                    {
+                        <p>+</p>
+                    }
+                </button>
+                
+                <!-- Lower 4 Secondary Photos -->
+                <div class="d-flex flex-wrap justify-content-center gap-3 mt-3">
+                    @for (int i = 0; i < 4; i++)
+                    {
+                        int capturedIndex = i; // 👈 freeze loop variable
+                        var uploaderId = $"secondaryImageUploader{capturedIndex}";
+
+                        <InputFile id="@uploaderId"
+                                   style="display:none;"
+                                   OnChange="e => HandleImageUpload(e, capturedIndex)"
+                                   accept="image/*" />
+
+                        <button class="btn btn-secondary d-flex align-items-center justify-content-center"
+                                style="width: 60px; height: 60px; padding: 0;"
+                                @onclick="@(() => JsRuntime.InvokeVoidAsync("triggerFileUpload", uploaderId))">
+                            @if (UploadedPhotos[capturedIndex] != null)
+                            {
+                                <img src="data:image/png;base64,@Convert.ToBase64String(UploadedPhotos[capturedIndex]!.ImageData)"
+                                     style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;" />
+                            }
+                            else
+                            {
+                                <p>+</p>
+                            }
+                        </button>
+                    }
+                </div>
+
+                <div class="d-flex flex-column gap-2 w-100">
+                    <input class="form-control border" style="color: black" placeholder="Enter Make" @bind="NewCar.Make" />
+                    <input class="form-control border" style="color: black" placeholder="Enter Model" @bind="NewCar.Model" />
+                    <input class="form-control border" style="color: black" placeholder="Enter Year" @bind="NewCar.Year"/>
+                    <input class="form-control border" style="color: black" placeholder="Enter Price" @bind="EnteredCost" type="number" step="0.01" />
+                    <input class="form-control border" style="color: black" placeholder="Enter Exterior Color" @bind="NewCar.ExtColor" />
+                    <input class="form-control border" style="color: black" placeholder="Enter Interior Color" @bind="NewCar.IntColor" />
+                    <input class="form-control border" style="color: black" placeholder="Enter Engine Type" @bind="NewCar.Engine" />
+                    <input class="form-control border" style="color: black" placeholder="Enter Transmission Type" @bind="NewCar.Transmission"/>
+                    <input class="form-control border" style="color: black" placeholder="Enter Features" @bind="NewCar.Features" />
+                    <input class="form-control border" style="color: black" placeholder="Enter Mileage" @bind="NewCar.Miles"/>
+
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-success mt-4" @onclick="SaveNewCarAsync">
+            Save New Car
+        </button>
+
+    </div>
+}
+
 
 @code {
-    private List<Cars_Model> Cars = new();
+    private List<Cars_Model> AllCars = new(); // Original full list
+    private List<Cars_Model> Cars = new();    // Filtered + sorted list
     private Dictionary<int, CarPhotos_Model?> PrimaryPhotos = new();
+    private bool IsAdmin = false;
+    private bool SortAscending = true;
+    private string SearchText = "";
+    private bool ShowPopup = false;
 
+    // Filter options and selected values
+    private List<string> Makes = new();
+    private List<string> Models = new();
+    private List<int> Years = new();
+
+    private string? selectedMake;
+    private string? selectedModel;
+    private int? selectedYear;
+
+    private Cars_Model NewCar = new();
+    private double EnteredCost = 0.00;
+
+    
+    private CarPhotos_Model? MainPhoto = null;
+    private List<CarPhotos_Model?> UploadedPhotos = new() { null, null, null, null };
+    
+    
+    private string? SelectedMake
+    {
+        get => selectedMake;
+        set
+        {
+            if (selectedMake != value)
+            {
+                selectedMake = value;
+                _ = ApplyFiltersAndSortingAsync();
+            }
+        }
+    }
+    
+    private string? SelectedModel
+    {
+        get => selectedModel;
+        set
+        {
+            if (selectedModel != value)
+            {
+                selectedModel = value;
+                _ = ApplyFiltersAndSortingAsync();
+            }
+        }
+    }
+
+    private int? SelectedYear
+    {
+        get => selectedYear;
+        set
+        {
+            if (selectedYear != value)
+            {
+                selectedYear = value;
+                _ = ApplyFiltersAndSortingAsync();
+            }
+        }
+    }
+
+    private void TogglePopup()
+    {
+        ShowPopup = !ShowPopup;
+    }
+
+    
     protected override async Task OnInitializedAsync()
     {
-        Cars = await DataService.GetCars();
+        await LoadCarsAsync();
+    }
 
+    private async Task LoadCarsAsync()
+    {
+        var userId = await Authenticator.GetCurrentUserIdAsync();
+        if (userId.HasValue)
+        {
+            var user = await DataService.GetUserById(userId.Value);
+            IsAdmin = user?.IsAdmin == 1;
+        }
+
+        var fetched = await DataService.GetCars();
+        AllCars = IsAdmin
+            ? fetched
+            : fetched.Where(c => c.SaleId == null).ToList();
+
+        // Extract unique filter options
+        Makes = AllCars.Select(c => c.Make).Distinct().OrderBy(m => m).ToList();
+        Models = AllCars.Select(c => c.Model).Distinct().OrderBy(m => m).ToList();
+        Years = AllCars.Select(c => c.Year).Distinct().OrderByDescending(y => y).ToList();
+
+        await ApplyFiltersAndSortingAsync();
+
+        // Load photos
+        PrimaryPhotos.Clear();
         foreach (var car in Cars)
         {
             var photo = await DataService.GetPrimaryPhoto(car.ItemId);
             PrimaryPhotos[car.ItemId] = photo;
         }
     }
+
+    private async Task ApplyFiltersAndSortingAsync()
+    {
+        IEnumerable<Cars_Model> query = AllCars;
+
+        // Apply filters
+        if (!string.IsNullOrEmpty(SelectedMake))
+            query = query.Where(c => c.Make == SelectedMake);
+
+        if (!string.IsNullOrEmpty(SelectedModel))
+            query = query.Where(c => c.Model == SelectedModel);
+
+        if (SelectedYear.HasValue)
+            query = query.Where(c => c.Year == SelectedYear.Value);
+        
+        if (!string.IsNullOrWhiteSpace(SearchText))
+        {
+            var keywords = SearchText.ToLower().Split(' ', StringSplitOptions.RemoveEmptyEntries);
+
+            query = query.Where(car =>
+                keywords.All(kw =>
+                    (car.Make?.ToLower().Contains(kw) ?? false) ||
+                    (car.Model?.ToLower().Contains(kw) ?? false) ||
+                    car.Year.ToString().Contains(kw)
+                )
+            );
+        }
+
+        Cars = query.ToList();
+
+        // Maintain current sort if needed (optional)
+        if (_currentSort != null)
+            await _currentSort.Invoke();
+    }
+    private async Task OnSearch()
+    {
+        await ApplyFiltersAndSortingAsync();
+    }
+
+    
+    // Keep track of current sort delegate
+    private Func<Task>? _currentSort = null;
+
+    private async Task SortByPriceAsync()
+    {
+        _currentSort = SortByPriceAsync;
+
+        Cars = SortAscending
+            ? Cars.OrderBy(c => c.Cost).ToList()
+            : Cars.OrderByDescending(c => c.Cost).ToList();
+
+        SortAscending = !SortAscending;
+    }
+
+    private async Task SortByMileageAsync()
+    {
+        _currentSort = SortByMileageAsync;
+
+        Cars = SortAscending
+            ? Cars.OrderBy(c => c.Miles).ToList()
+            : Cars.OrderByDescending(c => c.Miles).ToList();
+
+        SortAscending = !SortAscending;
+    }
+    
+    private async Task ClearSortAsync()
+    {
+        _currentSort = null;
+        SortAscending = true; // Reset sort direction
+        
+        await ApplyFiltersAndSortingAsync();
+    }
+    
+    private async Task HandleMainImageUpload(InputFileChangeEventArgs e)
+    {
+        var file = e.File;
+        using var stream = file.OpenReadStream(maxAllowedSize: 10_000_000);
+        using var ms = new MemoryStream();
+        await stream.CopyToAsync(ms);
+        var bytes = ms.ToArray();
+
+        MainPhoto = new CarPhotos_Model
+        {
+            ImageData = bytes,
+            ItemId = 0
+        };
+    }
+
+    private async Task HandleImageUpload(InputFileChangeEventArgs e, int index)
+    {
+        var file = e.File;
+        using var stream = file.OpenReadStream(maxAllowedSize: 10_000_000);
+        using var ms = new MemoryStream();
+        await stream.CopyToAsync(ms);
+        var bytes = ms.ToArray();
+
+        UploadedPhotos[index] = new CarPhotos_Model
+        {
+            ImageData = bytes,
+            ItemId = 0
+        };
+
+        StateHasChanged();
+        Console.WriteLine($"Uploaded photo for slot {index}");
+    }
+    
+    
+    private async Task SaveNewCarAsync()
+    {
+        NewCar.Cost = (int)(EnteredCost * 100); // Convert dollars to cents
+        var createdCar = await DataService.AddCar(NewCar);
+
+
+        if (createdCar == null)
+        {
+            Console.WriteLine("Failed to save new car.");
+            return;
+        }
+
+        int itemId = createdCar.ItemId;
+
+        // Step 2: Prepare photos with the new item ID
+        var allPhotos = new List<CarPhotos_Model>();
+
+        if (MainPhoto != null)
+        {
+            allPhotos.Add(new CarPhotos_Model
+            {
+                ImageData = MainPhoto.ImageData,
+                ItemId = itemId
+            });
+        }
+
+        foreach (var photo in UploadedPhotos)
+        {
+            if (photo != null)
+            {
+                allPhotos.Add(new CarPhotos_Model
+                {
+                    ImageData = photo.ImageData,
+                    ItemId = itemId
+                });
+            }
+        }
+
+        // Step 3: Save photos
+        foreach (var photo in allPhotos)
+        {
+            await DataService.AddCarPhoto(photo);
+        }
+
+        // Step 4: Reset state and close popup
+        NewCar = new Cars_Model();
+        MainPhoto = null;
+        UploadedPhotos = new() { null, null, null, null };
+        ShowPopup = false;
+
+        await LoadCarsAsync();
+        TogglePopup();
+    }
+
+    
+    
+    
+    
     
     private void NavigateToCarDetail(int itemId)
     {
         Navigation.NavigateTo($"/Inventory/Item/{itemId}");
     }
 }
+
+

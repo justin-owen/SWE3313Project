@@ -56,12 +56,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xMb2dpbi5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/kklan/RiderProjects/SWE3313Project/Luckys_Cars/Luckys_Cars/Components/Pages/Profile.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xQcm9maWxlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/kklan/RiderProjects/SWE3313Project/Luckys_Cars/Luckys_Cars/Components/Pages/SalesReport.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTYWxlc1JlcG9ydC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/kklan/RiderProjects/SWE3313Project/Luckys_Cars/Luckys_Cars/Components/Pages/SignUp.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTaWduVXAucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kklan/RiderProjects/SWE3313Project/Luckys_Cars/Luckys_Cars/Components/Pages/UserList.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xVc2VyTGlzdC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/kklan/RiderProjects/SWE3313Project/Luckys_Cars/Luckys_Cars/Components/Routes.razor]

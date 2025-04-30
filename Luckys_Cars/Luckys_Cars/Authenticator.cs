@@ -43,4 +43,23 @@ public class Authenticator : AuthenticationStateProvider
         var principal = new ClaimsPrincipal(new ClaimsIdentity());
         NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(principal)));
     }
+    
+    public async Task<int?> GetCurrentUserIdAsync()
+    {
+        var authState = await GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        if (user.Identity is not null && user.Identity.IsAuthenticated)
+        {
+            var userIdStr = user.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+
+            if (!string.IsNullOrWhiteSpace(userIdStr) && int.TryParse(userIdStr, out int userId))
+            {
+                return userId;
+            }
+        }
+
+        return null;
+    }
+
 }
